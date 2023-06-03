@@ -1,0 +1,15 @@
+{
+  "background_color": "orange",
+  "description": "Fit as many piece as you can",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "vite.svg",
+      "sizes": "192x192",
+      "type": "image/svg"
+    }
+  ],
+  "name": "Stack n Fit",
+  "short_name": "Stack&Fit",
+  "start_url": "/index.html"
+}
