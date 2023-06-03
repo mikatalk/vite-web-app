@@ -17,19 +17,10 @@ jobs:
         uses: actions/setup-node@v2
 
       - name: Install dependencies
-        run: yarn
+        run: pnpm i
 
       - name: Build Demo
-        run: yarn build
-      
-      - name: Build CRX file
-        run: yarn build:crx
-        
-      - name: Move CRX file
-        run: yarn move:crx
-      
-      #- name: Build Electorn file
-      #  run: yarn build:electron
+        run: pnpmi build
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.7.1
