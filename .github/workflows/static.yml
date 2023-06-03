@@ -17,10 +17,10 @@ jobs:
         uses: actions/setup-node@v3
 
       - name: Install dependencies
-        run: pnpm i
+        run: npm ci
 
       - name: Build Demo
-        run: pnpmi build
+        run: npm build
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.7.1
