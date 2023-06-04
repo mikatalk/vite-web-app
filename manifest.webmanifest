@@ -1,15 +1,1 @@
-{
-  "background_color": "orange",
-  "description": "Fit as many piece as you can",
-  "display": "fullscreen",
-  "icons": [
-    {
-      "src": "vite.svg",
-      "sizes": "192x192",
-      "type": "image/svg"
-    }
-  ],
-  "name": "Stack n Fit",
-  "short_name": "Stack&Fit",
-  "start_url": "/index.html"
-}
+{"name":"vite-web-app","short_name":"vite-web-app","start_url":"/vite-web-app/","display":"standalone","background_color":"#ffffff","lang":"en","scope":"/vite-web-app/"}
