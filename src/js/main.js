@@ -44,11 +44,19 @@ setupCounter(document.querySelector('#counter'))
 
 // Register service worker to control making site work offline
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker
-    .register('/src/js/sw.js')
-    .then(() => { console.log('Service Worker Registered'); });
+// if ('serviceWorker' in navigator) {
+//   navigator.serviceWorker
+//     .register('/src/js/sw.js')
+//     .then(() => { console.log('Service Worker Registered'); });
+// }
+
+import { registerSW } from "virtual:pwa-register";
+
+if ("serviceWorker" in navigator && !/localhost/.test(window.location)) {
+  registerSW();
 }
+
+
 
 // Code to handle install prompt on desktop
 
