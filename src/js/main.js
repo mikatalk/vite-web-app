@@ -63,6 +63,7 @@ if ("serviceWorker" in navigator && !/localhost/.test(window.location)) {
 let deferredPrompt;
 const addBtn = document.querySelector('.add-button');
 
+console.log('LOADED!')
 window.addEventListener('beforeinstallprompt', (e) => {
   console.log('INSTALL STARTING!')
   // Prevent Chrome 67 and earlier from automatically showing the prompt
