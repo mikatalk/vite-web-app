@@ -11,5 +11,5 @@
   ],
   "name": "Stack n Fit",
   "short_name": "Stack&Fit",
-  "start_url": "/index.html"
+  "start_url": "/vite-web-app/index.html"
 }
