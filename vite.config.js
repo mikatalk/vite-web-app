@@ -31,7 +31,7 @@ export default ({ mode }) => {
           registerType: 'autoUpdate',
           includeAssets: ['vite.svg'],
           workbox: {
-            importScripts: ['./sw-functional.js'],
+            importScripts: ['src/js/sw-functional.js'],
             globIgnores: ['**/node_modules/**/*', '**/sw.js'],
           },
         }),
