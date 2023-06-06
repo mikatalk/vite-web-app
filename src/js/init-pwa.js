@@ -9,7 +9,7 @@ if ("serviceWorker" in navigator && !/localhost/.test(window.location)) {
 // Code to handle install prompt on desktop
 
 let deferredPrompt;
-const addBtn = document.querySelector('.add-button');
+const addBtn = document.querySelector('#main-install-app-button');
 
 window.addEventListener('beforeinstallprompt', (e) => {
   // Prevent Chrome 67 and earlier from automatically showing the prompt
