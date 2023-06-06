@@ -43,8 +43,8 @@ if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.
   addBtn.style.display = 'none';
 }
 
-const isPWA = (win) =>
-		!!(win.matchMedia?.('(display-mode: standalone)').matches || (win.navigator).standalone);
+const isPWA = () =>
+		!!(window.matchMedia?.('(display-mode: standalone)').matches || (window.navigator).standalone);
 // if are standalone android OR safari
 if (isPWA()) {
   // hidden the button
