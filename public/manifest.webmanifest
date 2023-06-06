@@ -1,9 +1,7 @@
 {
 
-
   "scope": "/vite-web-app/",
-  "start_url": "/vite-web-app/index.html",
- 
+  "start_url": "/vite-web-app/index.html", 
 
   "background_color": "#fafafa",
   "theme_color": "#fafafa",
