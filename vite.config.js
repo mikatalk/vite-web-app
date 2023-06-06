@@ -13,8 +13,8 @@ export default ({ mode }) => {
             "scope": "/vite-web-app/",
             "start_url": "/vite-web-app/index.html", 
           
-            "background_color": "#fafafa",
-            "theme_color": "#fafafa",
+            "background_color": "#7cc4ff",
+            "theme_color": "#7cc4ff",
             "description": "Fit as many piece as you can",
             "display": "standalone",
             "icons": [

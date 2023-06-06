@@ -7,7 +7,6 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -21,6 +20,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -49,9 +49,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -74,39 +76,68 @@ button:focus-visible {
 
 
 #app {
-  margin: 0 auto;
+  margin: 0px;
   padding: 0px;
   text-align: center;
-  max-width: 800px;
+  width: 100%;
+  background-color: #2991e5;
+  min-height: 100vh;
+  padding: 0;
+  // padding: 10px;
 
-  width: calc(100% - 20px);
-
-  .grid {
-    background-color: #fff;
-    color: #444;
+  display: grid;
+  grid-gap: 0;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.2fr 0.6fr 0.2fr;
+  grid-auto-flow: row;
+  background-color: #2991e5;
+  
+  .header {
+    background-color: #7cc4ff;
+    min-height: 20vh;
+  }
+  
+  .footer {
+    min-height: 20vh;
+    background-color: #17507f;
+  }
+  
+  .grid-container {
+    // min-height: 60vh;
+    // min-height: 0;
+    background-color: #2991e5;
     margin: 0 auto;
-    padding: 5px;
-    display: grid;
-    grid-gap: 2px;
-    grid-template-columns: repeat(10, 0.1fr); 
-    grid-template-rows: repeat(10, 0.1fr); 
-    grid-auto-flow: row;
+    width: calc(100% - 20px);
+    padding: 10px 10px;
+    .grid {
+      background-color: #111111;
+      color: #444;
+      padding: 5px;
+      display: grid;
+      grid-gap: 2px;
+      grid-template-columns: repeat(10, 0.1fr);
+      grid-template-rows: repeat(10, 0.1fr);
+      grid-auto-flow: row;
 
-    grid-template-rows: auto;
-    grid-auto-flow: row;
-    align-items: stretch;
+      grid-template-rows: auto;
+      grid-auto-flow: row;
+      align-items: stretch;
 
-
-    .box {
-      position: relative;
-      background-color: #444;
-      color: #fff;
-      border-radius: 20%;
-      box-sizing: content-box;
-      width: 100%;
+      // width: calc(100% - 10px);
       height: 0;
       padding-bottom: 100%;
-      box-sizing: border-box;
+
+      .box {
+        position: relative;
+        background-color: #444;
+        color: #fff;
+        border-radius: 20%;
+        box-sizing: content-box;
+        width: 100%;
+        height: 0;
+        padding-bottom: 100%;
+        box-sizing: border-box;
+      }
     }
   }
 }
