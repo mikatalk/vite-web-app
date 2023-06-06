@@ -43,6 +43,15 @@ if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.
   addBtn.style.display = 'none';
 }
 
+const isPWA = (win) =>
+		!!(win.matchMedia?.('(display-mode: standalone)').matches || (win.navigator as any).standalone);
+// if are standalone android OR safari
+if (isPWA()) {
+  // hidden the button
+  addBtn.style.display = 'none';
+}
+
+
 // do action when finished install
 window.addEventListener('appinstalled', e => {
   console.log("success app install!");
