@@ -89,3 +89,14 @@ window.addEventListener('beforeinstallprompt', (e) => {
     });
   });
 });
+
+// if are standalone android OR safari
+if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+  // hidden the button
+  addBtn.style.display = 'none';
+}
+
+// do action when finished install
+window.addEventListener('appinstalled', e => {
+  console.log("success app install!");
+});
