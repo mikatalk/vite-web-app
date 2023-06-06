@@ -29,22 +29,15 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
+  // min-width: 80px;
   min-height: 100vh;
+  padding: 0;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
-
-#app {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
 
 button {
   border-radius: 8px;
@@ -82,20 +75,49 @@ button:focus-visible {
 
 
 #app {
+  margin: 0 auto;
+  margin: 40px;
+  padding: 0px;
+  text-align: center;
+  max-width: 800px;
+
+  width: calc(100% - 80px);
+
   .grid {
-    display: grid;
-    padding: 10px;
-    grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
-    grid-gap: 0px;
+    // display: grid;
+    // padding: 0px;
+    // grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+    // grid-gap: 0px;
     background-color: #fff;
     color: #444;
-  
+    // width: calc(100% - 40px);
+
+
+
+    margin: 0 auto;
+  display: grid;
+  grid-gap: 0;
+  // grid-template-columns: repeat(10, calc(calc(100% - 12px) * 0.1));
+  grid-template-columns: repeat(10,10%);
+  grid-template-rows: repeat(10, 10%);
+  grid-auto-flow: row;
+
+  grid-template-rows: auto;
+  grid-auto-flow: row;
+  align-items: stretch;
+
+
     .box {
+      position: relative;
       background-color: #444;
       color: #fff;
-      border-radius: 5px;
-      padding: 20px;
-      font-size: 150%;
+      border-radius: 50%;
+      box-sizing: content-box;
+      width: 100%;
+      height: 0;
+      padding-bottom: 100%;
+
+      box-sizing: border-box;
     }
   }
 }
