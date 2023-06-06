@@ -34,6 +34,26 @@ export default ({ mode }) => {
             importScripts: ['src/js/sw-functional.js'],
             globIgnores: ['**/node_modules/**/*', '**/sw.js'],
           },
+          manifest: {
+
+            "scope": "/vite-web-app/",
+            "start_url": "/vite-web-app/index.html", 
+          
+            "background_color": "#fafafa",
+            "theme_color": "#fafafa",
+            "description": "Fit as many piece as you can",
+            "display": "standalone",
+            "icons": [
+              {
+                "src": "icon.png",
+                "sizes": "512x512",
+                "type": "image/png",
+                "purpose": "any maskable"
+              }
+            ],
+            "name": "Stack n Fit",
+            "short_name": "Stack&Fit",
+          }
         }),
         CompileServiceWorker()
       ]
