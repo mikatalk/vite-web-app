@@ -144,7 +144,7 @@ height: auto;
       &:before {
         content: " ";
         position: absolute;
-        background: url(src/imgs/grid-bg.png) center no-repeat transparent;
+        background: url(~@/imgs/grid-bg.png) center no-repeat transparent;
       background-size: 100%;
       image-rendering: pixelated;
       top: -10px;

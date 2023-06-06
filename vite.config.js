@@ -1,5 +1,6 @@
-import { defineConfig } from 'vite';
-import { VitePWA } from "vite-plugin-pwa"
+import { defineConfig } from "vite";
+import { VitePWA } from "vite-plugin-pwa";
+import path from "path";
 
 export default ({ mode }) => {
     return defineConfig({
@@ -29,6 +30,12 @@ export default ({ mode }) => {
             "short_name": "Stack&Fit",
           }
         }),
-      ]
+      ],
+      resolve: {
+        alias: {
+          "@": path.resolve(__dirname, "/src"),
+          "~@": path.resolve(__dirname, "/src"),
+        },
+      },
     });
 }
