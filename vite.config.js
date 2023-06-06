@@ -4,22 +4,22 @@ import { VitePWA } from "vite-plugin-pwa"
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 
 
-const CompileServiceWorker = () => ({
-  name: 'compile-typescript-service-worker',
-  async writeBundle(_options, _outputBundle) {
-    const inputOptions = {
-      input: 'src/js/sw.js',
-      plugins: [nodeResolve()],
-    }
-    const outputOptions = {
-      file: 'dist/sw.js',
-      format: 'es',
-    }
-    const bundle = await rollup(inputOptions)
-    await bundle.write(outputOptions)
-    await bundle.close()
-  }
-})
+// const CompileServiceWorker = () => ({
+//   name: 'compile-typescript-service-worker',
+//   async writeBundle(_options, _outputBundle) {
+//     const inputOptions = {
+//       input: 'src/js/sw.js',
+//       plugins: [nodeResolve()],
+//     }
+//     const outputOptions = {
+//       file: 'dist/sw.js',
+//       format: 'es',
+//     }
+//     const bundle = await rollup(inputOptions)
+//     await bundle.write(outputOptions)
+//     await bundle.close()
+//   }
+// })
 
 
 
@@ -29,11 +29,11 @@ export default ({ mode }) => {
       plugins: [
         VitePWA({
           registerType: 'autoUpdate',
-          includeAssets: ['vite.svg'],
-          workbox: {
-            importScripts: ['src/js/sw-functional.js'],
-            globIgnores: ['**/node_modules/**/*', '**/sw.js'],
-          },
+          // includeAssets: ['vite.svg'],
+          // workbox: {
+          //   importScripts: ['src/js/sw-functional.js'],
+          //   globIgnores: ['**/node_modules/**/*', '**/sw.js'],
+          // },
           manifest: {
 
             "scope": "/vite-web-app/",
@@ -55,7 +55,7 @@ export default ({ mode }) => {
             "short_name": "Stack&Fit",
           }
         }),
-        CompileServiceWorker()
+        // CompileServiceWorker()
       ]
     });
 }
