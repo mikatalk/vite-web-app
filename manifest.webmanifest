@@ -1,1 +1,1 @@
-{"name":"vite-web-app","short_name":"vite-web-app","start_url":"/vite-web-app/","display":"standalone","background_color":"#ffffff","lang":"en","scope":"/vite-web-app/"}
+{"name":"Stack n Fit","short_name":"Stack&Fit","start_url":"/vite-web-app/index.html","display":"standalone","background_color":"#fafafa","lang":"en","scope":"/vite-web-app/","theme_color":"#fafafa","description":"Fit as many piece as you can","icons":[{"src":"icon.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}]}
