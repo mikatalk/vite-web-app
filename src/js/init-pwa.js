@@ -44,7 +44,7 @@ if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.
 }
 
 const isPWA = (win) =>
-		!!(win.matchMedia?.('(display-mode: standalone)').matches || (win.navigator as any).standalone);
+		!!(win.matchMedia?.('(display-mode: standalone)').matches || (win.navigator).standalone);
 // if are standalone android OR safari
 if (isPWA()) {
   // hidden the button
