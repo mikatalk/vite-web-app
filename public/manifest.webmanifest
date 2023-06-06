@@ -1,4 +1,10 @@
 {
+
+
+  "scope": "/vite-web-app/",
+  "start_url": "/vite-web-app/index.html",
+ 
+
   "background_color": "#fafafa",
   "theme_color": "#fafafa",
   "description": "Fit as many piece as you can",
@@ -13,5 +19,4 @@
   ],
   "name": "Stack n Fit",
   "short_name": "Stack&Fit",
-  "start_url": "/vite-web-app/index.html"
 }
