@@ -1,11 +1,10 @@
+console.log('Initializing PWA...')
 
 import { registerSW } from "virtual:pwa-register";
 
 if ("serviceWorker" in navigator && !/localhost/.test(window.location)) {
   registerSW();
 }
-
-console.log('here')
 
 // Code to handle install prompt on desktop
 
