@@ -1,8 +1,8 @@
 {
-  "background_color": "orange",
-  "theme_color": "orange",
+  "background_color": "#fafafa",
+  "theme_color": "#fafafa",
   "description": "Fit as many piece as you can",
-  "display": "fullscreen",
+  "display": "standalone",
   "icons": [
     {
       "src": "icon.png",
