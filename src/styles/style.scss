@@ -1,7 +1,7 @@
 @import "main-install-app-button.scss";
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: monospace;
   line-height: 1.5;
   font-weight: 400;
 
@@ -85,34 +85,43 @@ button:focus-visible {
   padding: 0;
   // padding: 10px;
 
-  display: grid;
-  grid-gap: 0;
-  grid-template-columns: 1fr;
-  grid-template-rows: 0.2fr 0.6fr 0.2fr;
-  grid-auto-flow: row;
-  background-color: #2991e5;
-  
+  // display: grid;
+  // grid-gap: 0;
+  // grid-template-columns: 1fr;
+  // grid-template-rows: 0.2fr auto auto;
+  // grid-auto-flow: row;
+  // background-color: #2991e5;
+  display: flex;
+  flex-direction: column;
+
   .header {
     background-color: #7cc4ff;
     min-height: 20vh;
+    .score-header {
+      color: #1f5f92;
+      text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
+               1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+    }
   }
   
   .footer {
-    min-height: 20vh;
+    // min-height: 0;
+    // padding-bottom: 20vh;
     background-color: #17507f;
+    flex: 1 1 auto;
   }
   
   .grid-container {
     // min-height: 60vh;
     // min-height: 0;
-    background-color: #2991e5;
     margin: 0 auto;
     width: calc(100% - 20px);
-    padding: 10px 10px;
+    padding: 0px 10px;
     .grid {
-      background-color: #111111;
+      position: relative;
+      background: transparent;
+      // background-color: #111111;
       color: #444;
-      padding: 5px;
       display: grid;
       grid-gap: 2px;
       grid-template-columns: repeat(10, 0.1fr);
@@ -123,10 +132,27 @@ button:focus-visible {
       grid-auto-flow: row;
       align-items: stretch;
 
+      max-width: 60vmax;
+      margin: 0 auto;
+      
       // width: calc(100% - 10px);
-      height: 0;
-      padding-bottom: 100%;
-
+      // height: 0;
+      // padding: 5px 5px calc(100% - 10px);
+      // height: 0;
+      padding: 5px;
+height: auto;
+      &:before {
+        content: " ";
+        position: absolute;
+        background: url(src/imgs/grid-bg.png) center no-repeat transparent;
+      background-size: 100%;
+      image-rendering: pixelated;
+      top: -10px;
+      right: -5px;
+      bottom: -10px;
+      left: -5px;
+      
+      }
       .box {
         position: relative;
         background-color: #444;
