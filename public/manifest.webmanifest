@@ -1,11 +1,12 @@
 {
   "background_color": "orange",
+  "theme_color": "orange",
   "description": "Fit as many piece as you can",
   "display": "fullscreen",
   "icons": [
     {
-      "src": "vite.svg",
-      "sizes": "192x192",
+      "src": "icon.png",
+      "sizes": "512x512",
       "type": "image/svg"
     }
   ],
