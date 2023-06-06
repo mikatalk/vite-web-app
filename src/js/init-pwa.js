@@ -5,7 +5,7 @@ if ("serviceWorker" in navigator && !/localhost/.test(window.location)) {
   registerSW();
 }
 
-
+console.log('here')
 
 // Code to handle install prompt on desktop
 
