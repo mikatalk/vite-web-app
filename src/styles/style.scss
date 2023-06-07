@@ -185,6 +185,8 @@ height: auto;
         padding-bottom: 100%;
         box-sizing: border-box;
         // z-index: 1;
+        transition: all 800ms ease-in-out;
+        background-color: #aa00;
         &:hover,
         &.active {
           background-color: #aa0f;
