@@ -126,8 +126,6 @@ button:focus-visible {
   }
   
   .grid-container {
-    // min-height: 60vh;
-    // min-height: 0;
     margin: 0 auto;
     width: calc(100% - 20px);
     padding: 0px 10px;
@@ -135,8 +133,6 @@ button:focus-visible {
 
     .grid {
       position: relative;
-      // background: transparent;
-      // background-color: #111111;
       color: #444;
       display: grid;
       grid-gap: 0px;
