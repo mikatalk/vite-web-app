@@ -1,5 +1,7 @@
 @import "main-install-app-button.scss";
 
+$max-width: 60vmax;
+
 :root {
   font-family: monospace;
   line-height: 1.5;
@@ -105,10 +107,21 @@ button:focus-visible {
   }
   
   .footer {
-    // min-height: 0;
     // padding-bottom: 20vh;
     background-color: #17507f;
     flex: 1 1 auto;
+    
+    .next-pieces {
+      max-width: $max-width;
+      margin: 10px auto;
+      min-height: 100px;
+      background: url(~@/imgs/pieces-bg.png) center no-repeat transparent;
+      background-size: 100% 100%;
+      image-rendering: pixelated;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
   
   .grid-container {
@@ -131,8 +144,8 @@ button:focus-visible {
       grid-template-rows: auto;
       grid-auto-flow: row;
       align-items: stretch;
-
-      max-width: 60vmax;
+      
+      max-width: $max-width;
       margin: 0 auto;
       
       // width: calc(100% - 10px);
@@ -145,11 +158,11 @@ height: auto;
         content: " ";
         position: absolute;
         background: url(~@/imgs/grid-bg.png) center no-repeat transparent;
-      background-size: 100%;
+      background-size: 100% 100%;
       image-rendering: pixelated;
-      top: -10px;
+      top: -5px;
       right: -5px;
-      bottom: -10px;
+      bottom: -5px;
       left: -5px;
       
       }
