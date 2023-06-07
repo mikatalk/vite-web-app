@@ -40,8 +40,6 @@ function update () {
 }
 
 function redraw() {
-  console.log('redraw')
-
   store.state.grid.cells.forEach(({value}, index) => {
     const el = cellElements[index];
     if (value === 'set') {
@@ -50,9 +48,4 @@ function redraw() {
       el.classList.remove('active');
     }
   })
-  
-  // gridElement.innerHTML = '<div class="grid-bg"></div>'
-  // store.state.grid.cells.forEach(({value}) => {
-  //   gridElement.innerHTML += `<div class="box ${value === 'set' ? 'active' : ''}"></div>`
-  // })
 }
