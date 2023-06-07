@@ -190,6 +190,7 @@ height: auto;
         background-color: #aa00;
         &:hover,
         &.active {
+          transition: all 30ms ease-in-out;
           background-color: #aa0f;
         }
       }
