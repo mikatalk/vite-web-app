@@ -16,23 +16,35 @@ store.state.grid.cells.forEach(({value}) => {
   value === 'set' && el.classList.add('active');
   cellElements.push(el);
   gridElement.appendChild(el);
-})
+});
 
-let lastChangeId = 0, changeId = 1;
+
+const footerElement = document.querySelector('#app .footer .bank');
+// const pieceElements = [];
+// store.state.bankPieces.forEach((piece) => {
+//   const el = document.createElement('div');
+//   // create piece image and append to div
+//   el.classList.add('piece');
+//   pieceElements.push(el);
+//   footerElement.appendChild(el);
+// });
+
+
+
+let lastChangeId = 0;
 update()
-store.doSomething();
-changeId += 1;
+store.mutate.doSomething();
+store.mutate.addPieceToBank();
+
+
 
 function update () {
   window.requestAnimationFrame(update);
-  
-  // store.doSomething();
 
-  store.doSomething();
-  changeId += 1;
+  store.mutate.doSomething();
   
-  if (lastChangeId !== changeId) {
-    lastChangeId = changeId;
+  if (lastChangeId !== store.state.changeId) {
+    lastChangeId = store.state.changeId;
     redraw();
   }
   
@@ -47,5 +59,22 @@ function redraw() {
     } else {
       el.classList.remove('active');
     }
+  })
+
+  footerElement.innerHTML = '';
+  store.state.bankPieces.forEach((piece, index) => {
+    // const el = pieceElements[index];
+    // console.log('el:', el)
+    // footerElement.appendChild(el);
+    // if (value === 'set') {
+    //   el.classList.add('active');
+    // } else {
+    //   el.classList.remove('active');
+    // }
+
+    const el = document.createElement('div');
+    // create piece image and append to div
+    el.classList.add('piece');
+    footerElement.appendChild(el);
   })
 }

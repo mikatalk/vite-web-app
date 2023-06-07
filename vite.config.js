@@ -1,6 +1,35 @@
 import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 import path from "path";
+import { createHtmlPlugin } from 'vite-plugin-html'
+
+const htmlPlugin = mode => {
+  const plugin = createHtmlPlugin({
+    entry: 'src/js/main.js',
+    inject: {
+      data: {
+        banner: ''
+      },
+    },
+  });
+  if (mode === 'production') {
+    plugin.inject.data.banner = `
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9675727214970019"
+        crossorigin="anonymous"></script>
+      <!-- pwa-bottom -->
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-9675727214970019"
+        data-ad-slot="1589920165"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>`;
+      
+  }
+  return plugin;
+}
 
 export default ({ mode }) => {
     return defineConfig({
@@ -34,6 +63,8 @@ export default ({ mode }) => {
             "short_name": "Bricks",
           }
         }),
+
+        htmlPlugin(mode)
       ],
       resolve: {
         alias: {
