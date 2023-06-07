@@ -6,7 +6,7 @@ import { createHtmlPlugin } from 'vite-plugin-html'
 const htmlPlugin = mode => {
   let banner = '';
   if (mode === 'production') {
-    baner = `
+    banner = `
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9675727214970019"
         crossorigin="anonymous"></script>
       <!-- pwa-bottom -->
