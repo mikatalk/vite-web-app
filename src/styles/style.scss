@@ -1,6 +1,6 @@
 @import "main-install-app-button.scss";
 
-$max-width: min(60vmax, 980px);
+$max-width: min(60vmax, 480px);
 
 :root {
   font-family: monospace;
@@ -112,7 +112,7 @@ button:focus-visible {
     flex: 1 1 auto;
     
     .next-pieces {
-      max-width: calc($max-width + 10px);
+      max-width: calc($max-width + 20px);
       width: 100%;
       margin: 10px auto;
       min-height: 100px;
