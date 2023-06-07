@@ -98,7 +98,7 @@ button:focus-visible {
 
   .header {
     background-color: #7cc4ff;
-    // min-height: 20vh;
+    min-height: 20vh;
     .score-header {
       color: #1f5f92;
       text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
@@ -112,7 +112,8 @@ button:focus-visible {
     flex: 1 1 auto;
     
     .next-pieces {
-      max-width: $max-width;
+      max-width: calc($max-width + 10px);
+      width: 100%;
       margin: 10px auto;
       min-height: 100px;
       background: url(~@/imgs/pieces-bg.png) center no-repeat transparent;
@@ -158,12 +159,12 @@ height: auto;
         content: " ";
         position: absolute;
         background: url(~@/imgs/grid-bg.png) center no-repeat transparent;
-      background-size: 100% 100%;
-      image-rendering: pixelated;
-      top: -5px;
-      right: -5px;
-      bottom: -5px;
-      left: -5px;
+        background-size: 100% 100%;
+        image-rendering: pixelated;
+        top: -5px;
+        right: 0px;
+        bottom: -5px;
+        left: 0px;
       
       }
       .box {
