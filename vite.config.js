@@ -4,16 +4,16 @@ import path from "path";
 import { createHtmlPlugin } from 'vite-plugin-html'
 
 const htmlPlugin = mode => {
-  const plugin = createHtmlPlugin({
+  const options = {
     entry: 'src/js/main.js',
     inject: {
       data: {
         banner: ''
       },
     },
-  });
+  };
   if (mode === 'production') {
-    plugin.inject.data.banner = `
+    options.inject.data.banner = `
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9675727214970019"
         crossorigin="anonymous"></script>
       <!-- pwa-bottom -->
@@ -26,9 +26,8 @@ const htmlPlugin = mode => {
       <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
       </script>`;
-      
   }
-  return plugin;
+  return createHtmlPlugin(options);
 }
 
 export default ({ mode }) => {
