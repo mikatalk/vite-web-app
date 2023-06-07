@@ -1,6 +1,6 @@
 @import "main-install-app-button.scss";
 
-$max-width: 60vmax;
+$max-width: min(60vmax, 980px);
 
 :root {
   font-family: monospace;
