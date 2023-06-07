@@ -12,6 +12,7 @@ const htmlPlugin = mode => {
       },
     },
   };
+  console.log('MOde', mode)
   if (mode === 'production') {
     options.inject.data.banner = `
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9675727214970019"

@@ -2,6 +2,11 @@
   .piece {
     width: 80px;
     height: 80px;
-    border: 2px dotted white;
+    border: 1px dotted white;
+    margin: 5px;
+    img {
+      width: 100%;
+      height: auto;
+    }
   }
 }

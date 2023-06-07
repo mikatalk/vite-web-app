@@ -3,6 +3,7 @@ import '../styles/style.scss'
 import './utils/init-pwa';
 
 import { store } from '../store';
+import { Assets } from './utils/Assets';
 
 
 console.log('store:', store)
@@ -30,12 +31,20 @@ const footerElement = document.querySelector('#app .footer .bank');
 // });
 
 
+Assets.loadImages(
+  [
+    { name: '', url: import('@/imgs/tile.png')}
+  ],
+  progress => console.log('Progress:', progress),
+  () => {
+    // store.mutate.doSomething();
+    store.mutate.addPieceToBank();
+    store.mutate.addPieceToBank();
+    store.mutate.addPieceToBank();
+    update()
+  }
+);
 
-// store.mutate.doSomething();
-store.mutate.addPieceToBank();
-store.mutate.addPieceToBank();
-store.mutate.addPieceToBank();
-update()
 
 
 
@@ -71,7 +80,8 @@ function redrawBank() {
   footerElement.innerHTML = '';
   store.state.bankPieces.forEach((piece, index) => {
     const el = document.createElement('div');
-    // create piece image and append to div
+    
+    el.appendChild(piece.thumbnail);
     el.classList.add('piece');
     footerElement.appendChild(el);
   })

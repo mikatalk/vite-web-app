@@ -69,15 +69,34 @@ export class Piece {
     
   ];
   
+  static canvas = document.createElement('canvas');
+  static context = Piece.canvas.getContext('2d');
+  thumbnail = null;
 
-  constructor (type = null) {
+  constructor (type = null, dropOffTarget, callBack) {
     if (type) {
       this.points = Piece.PIECES.find((a) => a.type === type);
     }
     this.points = this.getRandomPiece();
+    this.thumbnail = Piece.makeThumbnail(this);
   }
 
   getRandomPiece(){
     return JSON.parse(JSON.stringify(Piece.PIECES[Math.floor(Piece.PIECES.length * Math.random())]));
+  }
+
+  static makeThumbnail (piece) {
+    const image = new Image();
+    image.width = Piece.canvas.width = 100;
+    image.height = Piece.canvas.height = 100;
+    const ctx = Piece.context;
+    ctx.fillStyle = 'transparent'
+    ctx.fillRect(0,0,100,100);
+    ctx.fillStyle = 'red'
+    ctx.fillRect(0,0,10,10);
+    ctx.fillStyle = 'green'
+    ctx.fillRect(90,90,10,10);
+    image.src = Piece.canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+    return image;
   }
 }
