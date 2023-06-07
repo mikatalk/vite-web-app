@@ -131,13 +131,15 @@ button:focus-visible {
     margin: 0 auto;
     width: calc(100% - 20px);
     padding: 0px 10px;
+    z-index: 0;
+
     .grid {
       position: relative;
-      background: transparent;
+      // background: transparent;
       // background-color: #111111;
       color: #444;
       display: grid;
-      grid-gap: 2px;
+      grid-gap: 0px;
       grid-template-columns: repeat(10, 0.1fr);
       grid-template-rows: repeat(10, 0.1fr);
       grid-auto-flow: row;
@@ -155,7 +157,15 @@ button:focus-visible {
       // height: 0;
       padding: 5px 10px;
 height: auto;
-      &:before {
+
+        background: url(~@/imgs/grid-bg-2.png) center no-repeat transparent;
+        // background: red;
+        background-size: calc(100% - 20px) calc(100% - 10px);
+        image-rendering: pixelated;
+
+        // z-index: 0;
+        // z-index: 1;
+      .grid-bg {
         content: " ";
         position: absolute;
         background: url(~@/imgs/grid-bg.png) center no-repeat transparent;
@@ -165,11 +175,12 @@ height: auto;
         right: 0px;
         bottom: -5px;
         left: 0px;
-      
+        z-index: -1;
       }
       .box {
         position: relative;
-        background-color: #444;
+        // border: 1px dashed #4002;
+        // background-color: #444;
         color: #fff;
         border-radius: 20%;
         box-sizing: content-box;
@@ -177,6 +188,10 @@ height: auto;
         height: 0;
         padding-bottom: 100%;
         box-sizing: border-box;
+        // z-index: 1;
+        &:hover {
+          background-color: #aa0f;
+        }
       }
     }
   }
