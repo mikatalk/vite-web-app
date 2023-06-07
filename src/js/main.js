@@ -1,6 +1,6 @@
 import '../styles/style.scss'
 
-import './init-pwa';
+import './utils/init-pwa';
 
 import { store } from '../store';
 
@@ -31,27 +31,29 @@ const footerElement = document.querySelector('#app .footer .bank');
 
 
 
-let lastChangeId = 0;
-update()
-store.mutate.doSomething();
+// store.mutate.doSomething();
 store.mutate.addPieceToBank();
+store.mutate.addPieceToBank();
+store.mutate.addPieceToBank();
+update()
 
 
 
 function update () {
   window.requestAnimationFrame(update);
-
-  store.mutate.doSomething();
   
-  if (lastChangeId !== store.state.changeId) {
-    lastChangeId = store.state.changeId;
-    redraw();
+  // store.mutate.doSomething();
+  
+  if (store.getters.gridChanged()) {
+    redrawGrid();
   }
-  
-  // console.log('hi')
+  if (store.getters.bankChanged()) {
+    redrawBank();
+  }
 }
 
-function redraw() {
+function redrawGrid() {
+  console.log('redraw grid')
   store.state.grid.cells.forEach(({value}, index) => {
     const el = cellElements[index];
     if (value === 'set') {
@@ -60,21 +62,18 @@ function redraw() {
       el.classList.remove('active');
     }
   })
+  store.mutate.hasRendered('grid')
+}
 
+function redrawBank() {
+  console.log('redraw bank')
+  
   footerElement.innerHTML = '';
   store.state.bankPieces.forEach((piece, index) => {
-    // const el = pieceElements[index];
-    // console.log('el:', el)
-    // footerElement.appendChild(el);
-    // if (value === 'set') {
-    //   el.classList.add('active');
-    // } else {
-    //   el.classList.remove('active');
-    // }
-
     const el = document.createElement('div');
     // create piece image and append to div
     el.classList.add('piece');
     footerElement.appendChild(el);
   })
+  store.mutate.hasRendered('bank')
 }
