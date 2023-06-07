@@ -21,7 +21,6 @@ function update () {
 function redraw() {
   gridElement.innerHTML = '<div class="grid-bg"></div>'
   store.state.grid.cells.forEach(({value}) => {
-    console.log(' -')
     gridElement.innerHTML += `<div class="box ${value === 'set' ? 'active' : ''}"></div>`
   })
 }
