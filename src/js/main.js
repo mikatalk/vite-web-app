@@ -32,10 +32,10 @@ const pieceBackupElement = footerElement.querySelector('.backup.piece img');
 //   footerElement.appendChild(el);
 // });
 
-
+import imgTile from 'src/imgs/tile.png'
 Assets.loadImages(
   [
-    { name: 'tile', url: 'src/imgs/tile.png' },
+    { name: 'tile', url: imgTile },
     { name: 'tile-highlight', url: 'src/imgs/tile-highlight.png' },
     { name: 'tile-hover', url: 'src/imgs/tile-hover.png' },
   ],
