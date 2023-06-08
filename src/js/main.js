@@ -33,7 +33,7 @@ const footerElement = document.querySelector('#app .footer .bank');
 
 Assets.loadImages(
   [
-    { name: '', url: import('@/imgs/tile.png')}
+    { name: '', url: 'src/imgs/tile.png' }
   ],
   progress => console.log('Progress:', progress),
   () => {
