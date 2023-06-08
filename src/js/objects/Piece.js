@@ -1,3 +1,5 @@
+import { Assets } from "../utils/Assets";
+
 export class Piece {
   static PIECES = [
 
@@ -90,12 +92,17 @@ export class Piece {
     image.width = Piece.canvas.width = 100;
     image.height = Piece.canvas.height = 100;
     const ctx = Piece.context;
-    ctx.fillStyle = 'transparent'
-    ctx.fillRect(0,0,100,100);
-    ctx.fillStyle = 'red'
-    ctx.fillRect(0,0,10,10);
-    ctx.fillStyle = 'green'
-    ctx.fillRect(90,90,10,10);
+    const tile = Assets.getImage('tile-hover')
+    ctx.clearRect(0,0,100,100);
+    ctx.drawImage(tile, 0, 40, 20, 20);
+    ctx.drawImage(tile, 20, 40, 20, 20);
+    ctx.drawImage(tile, 40, 40, 20, 20);
+    ctx.drawImage(tile, 60, 40, 20, 20);
+    ctx.drawImage(tile, 80, 40, 20, 20);
+    // ctx.fillStyle = 'red'
+    // ctx.fillRect(0,0,10,10);
+    // ctx.fillStyle = 'green'
+    // ctx.fillRect(90,90,10,10);
     image.src = Piece.canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
     return image;
   }

@@ -1,7 +1,6 @@
+@import "variables.scss";
 @import "main-install-app-button.scss";
 @import "bank.scss";
-
-$max-width: min(60vmax, 480px);
 
 :root {
   font-family: monospace;
@@ -114,19 +113,7 @@ button:focus-visible {
     // padding-bottom: 20vh;
     background-color: #17507f;
     flex: 1 1 auto;
-    
-    .bank {
-      max-width: calc($max-width + 20px);
-      width: calc(100% - 20px);
-      margin: 10px auto;
-      min-height: 100px;
-      background: url(~@/imgs/pieces-bg.png) center no-repeat transparent;
-      background-size: 100% 100%;
-      image-rendering: pixelated;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+  
   }
   
   .grid-container {

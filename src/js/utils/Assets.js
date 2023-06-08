@@ -22,6 +22,6 @@ export class Assets {
   }
 
   static getImage(name) {
-    return files[name];
+    return Assets.files[name];
   }
 }

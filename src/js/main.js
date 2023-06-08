@@ -21,6 +21,8 @@ store.state.grid.cells.forEach(({value}) => {
 
 
 const footerElement = document.querySelector('#app .footer .bank');
+const bankPiecesElements = [...footerElement.querySelectorAll('.bank-pieces .piece img')];
+const pieceBackupElement = footerElement.querySelector('.bank-pieces');
 // const pieceElements = [];
 // store.state.bankPieces.forEach((piece) => {
 //   const el = document.createElement('div');
@@ -33,7 +35,9 @@ const footerElement = document.querySelector('#app .footer .bank');
 
 Assets.loadImages(
   [
-    { name: '', url: 'src/imgs/tile.png' }
+    { name: 'tile', url: 'src/imgs/tile.png' },
+    { name: 'tile-highlight', url: 'src/imgs/tile-highlight.png' },
+    { name: 'tile-hover', url: 'src/imgs/tile-hover.png' },
   ],
   progress => console.log('Progress:', progress),
   () => {
@@ -76,14 +80,8 @@ function redrawGrid() {
 
 function redrawBank() {
   console.log('redraw bank')
-  
-  footerElement.innerHTML = '';
   store.state.bankPieces.forEach((piece, index) => {
-    const el = document.createElement('div');
-    
-    el.appendChild(piece.thumbnail);
-    el.classList.add('piece');
-    footerElement.appendChild(el);
+    bankPiecesElements[index].src = piece.thumbnail.src;
   })
   store.mutate.hasRendered('bank')
 }
