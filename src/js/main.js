@@ -21,8 +21,8 @@ store.state.grid.cells.forEach(({value}) => {
 
 
 const footerElement = document.querySelector('#app .footer .bank');
-const bankPiecesElements = [...footerElement.querySelectorAll('.bank-pieces .piece img')];
-const pieceBackupElement = footerElement.querySelector('.bank-pieces');
+const bankPiecesElements = [...footerElement.querySelectorAll('.next.piece img')];
+const pieceBackupElement = footerElement.querySelector('.backup.piece img');
 // const pieceElements = [];
 // store.state.bankPieces.forEach((piece) => {
 //   const el = document.createElement('div');
@@ -45,6 +45,7 @@ Assets.loadImages(
     store.mutate.addPieceToBank();
     store.mutate.addPieceToBank();
     store.mutate.addPieceToBank();
+    store.mutate.addBackupPiece();
     update()
   }
 );
@@ -82,6 +83,7 @@ function redrawBank() {
   console.log('redraw bank')
   store.state.bankPieces.forEach((piece, index) => {
     bankPiecesElements[index].src = piece.thumbnail.src;
-  })
+  });
+  pieceBackupElement.src = store.state.backupPiece.thumbnail.src;
   store.mutate.hasRendered('bank')
 }

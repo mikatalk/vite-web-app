@@ -3,6 +3,12 @@ import { Assets } from "../utils/Assets";
 export class Piece {
   static PIECES = [
 
+    // empty
+    { 
+      type: "Empty",
+      points: []
+    },
+
     // XXX
     //   X
     //   X
@@ -75,34 +81,35 @@ export class Piece {
   static context = Piece.canvas.getContext('2d');
   thumbnail = null;
 
-  constructor (type = null, dropOffTarget, callBack) {
+  constructor (type = null) {
+    this.type = type;
+  // constructor (type = null, dropOffTarget, callBack) {
     if (type) {
       this.points = Piece.PIECES.find((a) => a.type === type);
+    } else {
+      this.points = this.getRandomPiece();
     }
-    this.points = this.getRandomPiece();
-    this.thumbnail = Piece.makeThumbnail(this);
+    this.thumbnail = this.makeThumbnail();
   }
 
   getRandomPiece(){
     return JSON.parse(JSON.stringify(Piece.PIECES[Math.floor(Piece.PIECES.length * Math.random())]));
   }
 
-  static makeThumbnail (piece) {
+  makeThumbnail () {
     const image = new Image();
     image.width = Piece.canvas.width = 100;
     image.height = Piece.canvas.height = 100;
     const ctx = Piece.context;
-    const tile = Assets.getImage('tile-hover')
     ctx.clearRect(0,0,100,100);
-    ctx.drawImage(tile, 0, 40, 20, 20);
-    ctx.drawImage(tile, 20, 40, 20, 20);
-    ctx.drawImage(tile, 40, 40, 20, 20);
-    ctx.drawImage(tile, 60, 40, 20, 20);
-    ctx.drawImage(tile, 80, 40, 20, 20);
-    // ctx.fillStyle = 'red'
-    // ctx.fillRect(0,0,10,10);
-    // ctx.fillStyle = 'green'
-    // ctx.fillRect(90,90,10,10);
+    const tile = Assets.getImage('tile-hover');
+    if (tile) {
+      ctx.drawImage(tile, 0, 40, 20, 20);
+      ctx.drawImage(tile, 20, 40, 20, 20);
+      ctx.drawImage(tile, 40, 40, 20, 20);
+      ctx.drawImage(tile, 60, 40, 20, 20);
+      ctx.drawImage(tile, 80, 40, 20, 20);
+    }
     image.src = Piece.canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
     return image;
   }

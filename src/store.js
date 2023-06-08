@@ -4,6 +4,7 @@ import { Piece } from "./js/objects/Piece";
 
 const state = {
   bankPieces: [],
+  backupPiece: null,
   grid: new Grid(),
   changes: {
     grid: {
@@ -25,7 +26,11 @@ export const store = {
       state.changes.grid.value += 1;
     },
     addPieceToBank () {
-      state.bankPieces.push(new Piece())
+      state.bankPieces.push(new Piece());
+      state.changes.bank.value += 1;
+    },
+    addBackupPiece () {
+      state.backupPiece = new Piece();
       state.changes.bank.value += 1;
     },
     hasRendered (target) {
