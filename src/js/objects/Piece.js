@@ -105,7 +105,7 @@ export class Piece {
     image.height = Piece.canvas.height = 100;
     const ctx = Piece.context;
     ctx.clearRect(0,0,100,100);
-    const tile = Assets.getImage('tile-hover');
+    const tile = Assets.getImage('tile');
     const width = (1 + Math.max(...this.polyline.points.map(([x]) => x))) - Math.min(...this.polyline.points.map(([x]) => x));
     const height = (1 + Math.max(...this.polyline.points.map(([,y]) => y))) - Math.min(...this.polyline.points.map(([,y]) => y));
     if (tile) {
@@ -113,10 +113,6 @@ export class Piece {
         ctx.drawImage(tile,
           50 - width * 10 + x * 20,
           50 - height * 10 + y * 20,
-          // 40,
-          // 40 - width * 10 + x * 20,
-          // 40,
-          // 40 - height * 10 + y * 20,
           20, 20);
       }
     }
