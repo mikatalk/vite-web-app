@@ -33,11 +33,13 @@ const pieceBackupElement = footerElement.querySelector('.backup.piece img');
 // });
 
 import imgTile from './../imgs/tile.png'
+import imgTileHighlight from './../imgs/tile-highlight.png'
+import imgTileHover from './../imgs/tile-hover.png'
 Assets.loadImages(
   [
     { name: 'tile', url: imgTile },
-    { name: 'tile-highlight', url: 'src/imgs/tile-highlight.png' },
-    { name: 'tile-hover', url: 'src/imgs/tile-hover.png' },
+    { name: 'tile-highlight', url: imgTileHighlight },
+    { name: 'tile-hover', url: imgTileHover },
   ],
   progress => console.log('Progress:', progress),
   () => {
