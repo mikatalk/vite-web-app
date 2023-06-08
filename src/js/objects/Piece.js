@@ -3,11 +3,11 @@ import { Assets } from "../utils/Assets";
 export class Piece {
   static PIECES = [
 
-    // empty
-    { 
-      type: "Empty",
-      points: []
-    },
+    // // empty
+    // { 
+    //   type: "Empty",
+    //   points: []
+    // },
 
     // XXX
     //   X
@@ -81,20 +81,23 @@ export class Piece {
   static context = Piece.canvas.getContext('2d');
   thumbnail = null;
 
-  constructor (type = null) {
+  constructor (type = Piece.getRandomType()) {
     this.type = type;
   // constructor (type = null, dropOffTarget, callBack) {
-    if (type) {
-      this.points = Piece.PIECES.find((a) => a.type === type);
-    } else {
-      this.points = this.getRandomPiece();
-    }
+    // if (type) {
+      this.polyline = Piece.PIECES.find((a) => a.type === type);
+    // } else {
+    //   this.polyline = this.getRandomPiece();
+    // }
     this.thumbnail = this.makeThumbnail();
   }
 
-  getRandomPiece(){
-    return JSON.parse(JSON.stringify(Piece.PIECES[Math.floor(Piece.PIECES.length * Math.random())]));
+  static getRandomType(){
+    return Piece.PIECES[Math.floor(Piece.PIECES.length * Math.random())].type;
   }
+  // getRandomPiece(){
+  //   return JSON.parse(JSON.stringify(Piece.PIECES[Math.floor(Piece.PIECES.length * Math.random())]));
+  // }
 
   makeThumbnail () {
     const image = new Image();
@@ -103,12 +106,19 @@ export class Piece {
     const ctx = Piece.context;
     ctx.clearRect(0,0,100,100);
     const tile = Assets.getImage('tile-hover');
+    const width = (1 + Math.max(...this.polyline.points.map(([x]) => x))) - Math.min(...this.polyline.points.map(([x]) => x));
+    const height = (1 + Math.max(...this.polyline.points.map(([,y]) => y))) - Math.min(...this.polyline.points.map(([,y]) => y));
     if (tile) {
-      ctx.drawImage(tile, 0, 40, 20, 20);
-      ctx.drawImage(tile, 20, 40, 20, 20);
-      ctx.drawImage(tile, 40, 40, 20, 20);
-      ctx.drawImage(tile, 60, 40, 20, 20);
-      ctx.drawImage(tile, 80, 40, 20, 20);
+      for (let [x, y] of this.polyline.points) {
+        ctx.drawImage(tile,
+          50 - width * 10 + x * 20,
+          50 - height * 10 + y * 20,
+          // 40,
+          // 40 - width * 10 + x * 20,
+          // 40,
+          // 40 - height * 10 + y * 20,
+          20, 20);
+      }
     }
     image.src = Piece.canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
     return image;

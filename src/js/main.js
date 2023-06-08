@@ -85,7 +85,9 @@ function redrawBank() {
   console.log('redraw bank')
   store.state.bankPieces.forEach((piece, index) => {
     bankPiecesElements[index].src = piece.thumbnail.src;
+    bankPiecesElements[index].setAttribute('piece-type', piece.type);
   });
   pieceBackupElement.src = store.state.backupPiece.thumbnail.src;
+  pieceBackupElement.setAttribute('piece-type', store.state.backupPiece.type);
   store.mutate.hasRendered('bank')
 }
