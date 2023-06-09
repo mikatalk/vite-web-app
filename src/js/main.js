@@ -4,6 +4,7 @@ import './utils/init-pwa';
 
 import { store } from '../store';
 import { Assets } from './utils/Assets';
+import { Draggable } from './objects/Draggable';
 
 
 console.log('store:', store)
@@ -23,14 +24,19 @@ store.state.grid.cells.forEach(({value}) => {
 const footerElement = document.querySelector('#app .footer .bank');
 const bankPiecesElements = [...footerElement.querySelectorAll('.next.piece img')];
 const pieceBackupElement = footerElement.querySelector('.backup.piece img');
-// const pieceElements = [];
-// store.state.bankPieces.forEach((piece) => {
-//   const el = document.createElement('div');
-//   // create piece image and append to div
-//   el.classList.add('piece');
-//   pieceElements.push(el);
-//   footerElement.appendChild(el);
-// });
+
+const draggable = new Draggable([...bankPiecesElements, pieceBackupElement], gridElement,
+  (action, data) => {
+    console.log('DRAG?', action, data)
+    switch (action) {
+      case 'drag':
+        console.log('DRAG', data)
+        break;
+      case 'drop':
+        console.log('DROP', data)
+        break;
+    }
+  })
 
 import imgTile from './../imgs/tile.png'
 import imgTileHighlight from './../imgs/tile-highlight.png'

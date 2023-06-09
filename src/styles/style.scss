@@ -1,6 +1,7 @@
 @import "variables.scss";
 @import "main-install-app-button.scss";
 @import "bank.scss";
+@import "draggable-image.scss";
 
 :root {
   font-family: monospace;
@@ -181,7 +182,7 @@ height: auto;
         &:hover,
         &.active {
           transition: all 30ms ease-in-out;
-          background-color: #aa0f;
+          background-color: rgba(242, 242, 227, 0.318);
         }
       }
     }

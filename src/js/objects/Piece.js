@@ -113,7 +113,7 @@ export class Piece {
         ctx.drawImage(tile,
           50 - width * 10 + x * 20,
           50 - height * 10 + y * 20,
-          20, 20);
+          18, 18);
       }
     }
     image.src = Piece.canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
