@@ -2,7 +2,12 @@ export class Draggable {
 
   image = new Image();
   
-  dragging = false;
+  // dragging = false;
+
+  pieceId = '';
+  
+  lastX = -1;
+  lastY = -1;
 
   constructor (dragFromElements, dragTo, callBack) {
     
@@ -19,10 +24,8 @@ export class Draggable {
     this.hideImage();
     
     dragFromElements.forEach((piece, index) => {
-      // piece.addEventListener('pointerdown', this.dragStart);
       piece.addEventListener('mousedown', this.dragStart);
       piece.addEventListener('touchstart', this.touchStart);
-      // document.addEventListener('touchstart', e => e.preventDefault(), false);
 
       document.addEventListener('touchmove', this.touchMove);
       document.addEventListener('mousemove', this.dragMove);
@@ -30,7 +33,6 @@ export class Draggable {
       document.addEventListener('touchup', this.dragStop);
       document.addEventListener('touchend', this.dragStop);
       document.addEventListener('touchcancel', this.dragStop);
-      document.isTrusted = true;
 
       document.addEventListener('mouseleave', this.dragStop);
       document.addEventListener('mouseup', this.dragStop);
@@ -41,14 +43,14 @@ export class Draggable {
     event.stopPropagation();
     event.preventDefault();
     const [touch] = event.touches;
-    this.dragStart(touch);
+    event.pageX = touch.pageX;
+    event.pageY = touch.pageY;
+    this.dragStart(event);
   }
   dragStart = (event) => {
-    // event.stopPropagation();
-    // event.preventDefault();
-    this.callBack('drag', { piece: event.target });
+    this.pieceId = event.target.id;
+    this.callBack('drag', { pieceId: this.pieceId });
 
-    this.dragging = true;
     this.image.src = event.target.src;
     this.showImage();
 
@@ -62,44 +64,39 @@ export class Draggable {
   
   touchMove = (event) => {
     const [touch] = event.touches;
-    this.dragMove(touch);
-    event.stopPropagation();
-    event.preventDefault();
+    event.pageX = touch.pageX;
+    event.pageY = touch.pageY;
+    this.dragMove(event);
   }
 
   dragMove = (event) => {
     if (!this.dragging) {
       return
     }
-    // event.stopPropagation();
-    // event.preventDefault();
-
-    {
-      const { width } = this.dragTo.getBoundingClientRect();
-      const size = width / 2.1;
-      this.image.style.width = this.image.style.height = size + 'px';
-      this.image.style.top = event.pageY - window.scrollY - size/2 + 'px';
-      this.image.style.left = event.pageX - size/2 + 'px'; 
-    }
-   
-    {
-      const { x, y } = this.getDropPosition(event);
-      this.callBack('move', { x, y });
-    }
-
-   
+    const { width } = this.dragTo.getBoundingClientRect();
+    const size = width / 2.1;
+    this.image.style.width = this.image.style.height = size + 'px';
+    this.image.style.top = event.pageY - window.scrollY - size/2 + 'px';
+    this.image.style.left = event.pageX - size/2 + 'px'; 
+    const { x, y } = this.getDropPosition(event);
+    this.lastX = x;
+    this.lastY = y;
+    this.callBack('move', { x, y, pieceId: this.pieceId });
   }
-  
+
+
   dragStop = (event) => {
     if (!this.dragging) {
       return
     }
     event.preventDefault(); 
     event.stopPropagation(); 
-    
-    const { x, y } = this.getDropPosition(event);
-    this.callBack('drop', { x, y });
-    this.dragging = false;
+    this.callBack('drop', {
+      x: this.lastX,
+      y: this.lastY,
+      pieceId: this.pieceId
+    });
+    this.pieceId = null;
     this.hideImage();
     navigator.vibrate(60);
   }
@@ -124,5 +121,9 @@ export class Draggable {
     this.image.style.display = 'none';
     document.body.style.overflow = 'auto';
     document.body.style.touchAction = 'unset';
+  }
+
+  get dragging () {
+    return this.pieceId !== null && this.pieceId !== ''
   }
 }

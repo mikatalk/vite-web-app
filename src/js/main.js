@@ -29,13 +29,23 @@ const draggable = new Draggable([...bankPiecesElements, pieceBackupElement], gri
   (action, data) => {
     switch (action) {
       case 'drag':
-        console.log('DRAG', data)
-        break;
-      case 'drop':
-        console.log('DROP', data)
+        {
+          console.log('DRAG', data)
+          const { pieceId } = data;
+          document.getElementById(pieceId).style.opacity = 0;
+        }
         break;
       case 'move':
         console.log('MOVE', data)
+        
+        break;
+      case 'drop':
+        {
+
+          console.log('DROP', data)
+          const { pieceId } = data;
+          document.getElementById(pieceId).style.opacity = 1;
+        }
         break;
     }
   });
