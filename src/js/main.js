@@ -12,7 +12,7 @@ console.log('cells:', store.state.grid.cells)
 
 const gridElement = document.querySelector('#app .grid');
 const cellElements = [];
-store.state.grid.cells.forEach(({value}) => {
+store.state.grid.cells.forEach(({ value }) => {
   const el = document.createElement('div');
   el.classList.add('box');
   value === 'set' && el.classList.add('active');
@@ -27,7 +27,6 @@ const pieceBackupElement = footerElement.querySelector('.backup.piece img');
 
 const draggable = new Draggable([...bankPiecesElements, pieceBackupElement], gridElement,
   (action, data) => {
-    console.log('DRAG?', action, data)
     switch (action) {
       case 'drag':
         console.log('DRAG', data)
@@ -35,8 +34,11 @@ const draggable = new Draggable([...bankPiecesElements, pieceBackupElement], gri
       case 'drop':
         console.log('DROP', data)
         break;
+      case 'move':
+        console.log('MOVE', data)
+        break;
     }
-  })
+  });
 
 import imgTile from './../imgs/tile.png'
 import imgTileHighlight from './../imgs/tile-highlight.png'
@@ -61,11 +63,11 @@ Assets.loadImages(
 
 
 
-function update () {
+function update() {
   window.requestAnimationFrame(update);
-  
+
   // store.mutate.doSomething();
-  
+
   if (store.getters.gridChanged()) {
     redrawGrid();
   }
@@ -76,7 +78,7 @@ function update () {
 
 function redrawGrid() {
   console.log('redraw grid')
-  store.state.grid.cells.forEach(({value}, index) => {
+  store.state.grid.cells.forEach(({ value }, index) => {
     const el = cellElements[index];
     if (value === 'set') {
       el.classList.add('active');

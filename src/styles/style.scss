@@ -1,7 +1,6 @@
 @import "variables.scss";
 @import "main-install-app-button.scss";
 @import "bank.scss";
-@import "draggable-image.scss";
 
 :root {
   font-family: monospace;
@@ -177,11 +176,22 @@ height: auto;
         padding-bottom: 100%;
         box-sizing: border-box;
         // z-index: 1;
-        transition: all 800ms ease-in-out;
-        background-color: #aa00;
-        &:hover,
-        &.active {
-          transition: all 30ms ease-in-out;
+        // transition: all 800ms ease-in-out;
+        background-color: rgba(242, 242, 227, 0);
+        @keyframes fade-animation {
+          0%  {background-color: rgba(242, 242, 227, 0);}
+          5% {background-color: rgba(242, 242, 227, 0.318);}
+          100% {background-color: rgba(242, 242, 227, 0);}
+        }
+        animation-name: fade-animation;
+        animation-duration: 0.5s;
+        &:hover {
+        // &:hover,
+        // &.active {
+          animation-name: fade-animation;
+          animation-duration: 1s;
+          // animation
+          // transition: all 30ms ease-in-out;
           background-color: rgba(242, 242, 227, 0.318);
         }
       }
