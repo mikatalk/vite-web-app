@@ -12,7 +12,7 @@ export class Draggable {
     
     this.image.id = 'draggable-image';
     this.image.draggable = false;
-    this.image.style.image-rendering = 'pixelated';
+    this.image.style.imageRendering = 'pixelated';
     this.image.style.position = 'fixed';
     document.body.appendChild(this.image);
     
