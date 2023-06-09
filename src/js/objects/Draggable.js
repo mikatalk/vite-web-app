@@ -49,8 +49,11 @@ export class Draggable {
     if (!this.dragging) {
       return
     }
-    this.image.style.left = event.pageX - this.image.width/2 + 'px';
-    this.image.style.top = event.pageY - window.scrollY - this.image.width/2 + 'px';
+    const { width } = this.dragTo.getBoundingClientRect();
+    const size = width / 2.1;
+    this.image.style.width = this.image.style.height = size + 'px';
+    this.image.style.top = event.pageY - window.scrollY - size/2 + 'px';
+    this.image.style.left = event.pageX - size/2 + 'px';
     // console.log(' + drag move', event.pageX), event.pageY;
     
   }
