@@ -21,10 +21,6 @@ const state = {
 export const store = {
   state,
   mutate: {
-    doSomething () {
-      state.grid.setCellValueAtPoint(Math.floor(Math.random()*10), Math.floor(Math.random()*10), Cell[Math.random() > 0.5 ? 'SET' : 'UNSET']);
-      state.changes.grid.value += 1;
-    },
     addPieceToBank () {
       state.bankPieces.push(new Piece());
       state.changes.bank.value += 1;
@@ -38,11 +34,18 @@ export const store = {
     },
   },
   getters: {
-    // gridChanged: () => {
-    //   console.log( state.changes.grid.previous, state.changes.grid.value)
-
-    //   return state.changes.grid.previous !== state.changes.grid.value
-    // },
+    getPieceById: pieceId => {
+      switch (pieceId) {
+        case 'bank-piece-1':
+          return state.bankPieces[0];
+        case 'bank-piece-2':
+          return state.bankPieces[1];
+        case 'bank-piece-3':
+          return state.bankPieces[2];
+        case 'backup-piece':
+          return state.backupPiece;
+      }
+    },
     gridChanged: () => state.changes.grid.previous !== state.changes.grid.value,
     bankChanged: () => state.changes.bank.previous !== state.changes.bank.value,
   }

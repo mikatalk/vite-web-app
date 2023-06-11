@@ -1,6 +1,7 @@
 export class Cell {
-  static UNSET = 'unset';
+  static UNSET = '';
   static SET = 'set';
+  static PREVIEW = 'preview';
 
   constructor (x, y, value = Cell.UNSET) {
     this.x = x;

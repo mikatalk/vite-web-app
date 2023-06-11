@@ -6,16 +6,16 @@ import { store } from '../store';
 import { Assets } from './utils/Assets';
 import { Draggable } from './objects/Draggable';
 
-
-console.log('store:', store)
-console.log('cells:', store.state.grid.cells)
+const { state, getters } = store;
+const { grid } = state;
+const { cells } = grid;
 
 const gridElement = document.querySelector('#app .grid');
 const cellElements = [];
-store.state.grid.cells.forEach(({ value }) => {
+cells.forEach(({ value }) => {
   const el = document.createElement('div');
   el.classList.add('box');
-  value === 'set' && el.classList.add('active');
+  value === Cell.SET && el.classList.add('active');
   cellElements.push(el);
   gridElement.appendChild(el);
 });
@@ -30,21 +30,32 @@ const draggable = new Draggable([...bankPiecesElements, pieceBackupElement], gri
     switch (action) {
       case 'drag':
         {
-          console.log('DRAG', data)
           const { pieceId } = data;
           document.getElementById(pieceId).style.opacity = 0;
         }
         break;
       case 'move':
-        console.log('MOVE', data)
-        
+        const { x, y, pieceId } = data;
+        const piece = getters.getPieceById(pieceId);
+        const { points } = piece.polyline;
+        const fit = grid.doesItFitAt(x, y, points, Cell.PREVIEW);
+        state.changes.grid.value += 1;
         break;
       case 'drop':
         {
+          const { x, y, pieceId } = data;
+          if (x > 0.75 && y > 1) {
+            console.log('BANK DROP!')
+          }
+          const piece = getters.getPieceById(pieceId);
+          const { points } = piece.polyline;
+          const fit = grid.doesItFitAt(x, y, points, Cell.SET);
+          if (fit) {
 
-          console.log('DROP', data)
-          const { pieceId } = data;
-          document.getElementById(pieceId).style.opacity = 1;
+          } else {
+            document.getElementById(pieceId).style.opacity = 1;
+          }
+          state.changes.grid.value += 1;
         }
         break;
     }
@@ -53,6 +64,7 @@ const draggable = new Draggable([...bankPiecesElements, pieceBackupElement], gri
 import imgTile from './../imgs/tile.png'
 import imgTileHighlight from './../imgs/tile-highlight.png'
 import imgTileHover from './../imgs/tile-hover.png'
+import { Cell } from './objects/Cell';
 Assets.loadImages(
   [
     { name: 'tile', url: imgTile },
@@ -78,23 +90,29 @@ function update() {
 
   // store.mutate.doSomething();
 
-  if (store.getters.gridChanged()) {
+  if (getters.gridChanged()) {
     redrawGrid();
   }
-  if (store.getters.bankChanged()) {
+  if (getters.bankChanged()) {
     redrawBank();
   }
 }
 
 function redrawGrid() {
   console.log('redraw grid')
-  store.state.grid.cells.forEach(({ value }, index) => {
+  cells.forEach(({ value }, index) => {
     const el = cellElements[index];
-    if (value === 'set') {
-      el.classList.add('active');
-    } else {
-      el.classList.remove('active');
-    }
+    // reset classes
+    el.className = 'box ' + value;
+        // el.classList.add(Cell.SET);
+    // switch (value) {
+    //   case Cell.SET:
+    //     el.classList.add(Cell.SET);
+    //     break;
+    //   // case Cell.SET:
+    //   //   el.classList.add(Cell.SET);
+    //   //   break;
+    // }
   })
   store.mutate.hasRendered('grid')
 }

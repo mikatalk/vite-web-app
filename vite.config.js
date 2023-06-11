@@ -28,7 +28,6 @@ const htmlPlugin = mode => {
       },
     },
   };
-  console.log('MOde', mode)
   return createHtmlPlugin(options);
 }
 

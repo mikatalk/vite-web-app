@@ -1,8 +1,8 @@
+import { Cell } from "./Cell";
+
 export class Draggable {
 
   image = new Image();
-  
-  // dragging = false;
 
   pieceId = '';
   
@@ -74,7 +74,7 @@ export class Draggable {
       return
     }
     const { width } = this.dragTo.getBoundingClientRect();
-    const size = width / 2.1;
+    const size = width / 2.2;
     this.image.style.width = this.image.style.height = size + 'px';
     this.image.style.top = event.pageY - window.scrollY - size/2 + 'px';
     this.image.style.left = event.pageX - size/2 + 'px'; 
@@ -83,7 +83,6 @@ export class Draggable {
     this.lastY = y;
     this.callBack('move', { x, y, pieceId: this.pieceId });
   }
-
 
   dragStop = (event) => {
     if (!this.dragging) {
@@ -100,14 +99,16 @@ export class Draggable {
     this.hideImage();
     navigator.vibrate(60);
   }
-  
+
   getDropPosition (event) {
     const mouseX = event.pageX;
     const mouseY = event.pageY - window.scrollY;
-    const margin = 5; // account for the 5px margin on the frame
+    // account for the margins on the frame
+    const marginX = 10;
+    const marginY = 5;
     const { left, top, width, height} = this.dragTo.getBoundingClientRect();
-    const x = (mouseX - left) / (width - margin * 2);
-    const y = (mouseY - top) / (height - margin * 2);
+    const x = (mouseX - left - marginX) / (width - marginX * 2);
+    const y = (mouseY - top - marginY) / (height - marginY * 2);
     return { x, y };
   }
 
@@ -120,7 +121,7 @@ export class Draggable {
   hideImage () {
     this.image.style.display = 'none';
     document.body.style.overflow = 'auto';
-    document.body.style.touchAction = 'unset';
+    document.body.style.touchAction = Cell.UNSET;
   }
 
   get dragging () {
