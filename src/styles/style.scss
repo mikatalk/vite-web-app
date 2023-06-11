@@ -163,7 +163,7 @@ height: auto;
           // animation
           // transition: all 30ms ease-in-out;
           background-color: rgba(242, 242, 227, 0.8);
-          background: url(src/imgs/tile.png) center no-repeat transparent;
+          background: url(~@/imgs/tile.png) center no-repeat transparent;
           background-size: calc(100% - 3px);
           background-position: 1px 1px;
         }
@@ -172,7 +172,7 @@ height: auto;
           background-color: rgba(242, 0, 227, 0.8);
         }
         &.preview {
-          background: url(src/imgs/tile-hover.png) center no-repeat transparent;
+          background: url(~@/imgs/tile-hover.png) center no-repeat transparent;
           background-size: 100%;
           // background-size: calc(100% - 3px);
           // background-position: 1px 1px;
