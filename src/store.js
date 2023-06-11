@@ -3,6 +3,7 @@ import { Grid } from "./js/objects/Grid";
 import { Piece } from "./js/objects/Piece";
 
 const state = {
+  score: 0,
   bankPieces: [],
   backupPiece: null,
   grid: new Grid(),
@@ -31,6 +32,9 @@ export const store = {
     },
     hasRendered (target) {
       state.changes[target].previous = state.changes[target].value;
+    },
+    bumpScoreBy (points) {
+      state.score += points;
     },
   },
   getters: {

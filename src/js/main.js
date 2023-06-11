@@ -21,6 +21,7 @@ cells.forEach(({ value }) => {
 });
 
 
+const scoreText = document.querySelector('#app .score-header .score-value');
 const footerElement = document.querySelector('#app .footer .bank');
 const bankPiecesElements = [...footerElement.querySelectorAll('.next.piece img')];
 const pieceBackupElement = footerElement.querySelector('.backup.piece img');
@@ -51,7 +52,7 @@ const draggable = new Draggable([...bankPiecesElements, pieceBackupElement], gri
           const { points } = piece.polyline;
           const fit = grid.doesItFitAt(x, y, points, Cell.SET);
           if (fit) {
-
+            store.mutate.bumpScoreBy(points.length * 5)
           } else {
             document.getElementById(pieceId).style.opacity = 1;
           }
@@ -92,10 +93,15 @@ function update() {
 
   if (getters.gridChanged()) {
     redrawGrid();
+    redrawScore();
   }
   if (getters.bankChanged()) {
     redrawBank();
   }
+}
+
+function redrawScore() {
+  scoreText.innerHTML = state.score.toLocaleString();
 }
 
 function redrawGrid() {
