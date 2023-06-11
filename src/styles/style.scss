@@ -50,7 +50,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #17507f;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -102,12 +102,19 @@ button:focus-visible {
   .header {
     background-color: #7cc4ff;
     min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
     .score-header {
       color: #1f5f92;
       text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
                1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
-      letter-spacing: -5px;
+      letter-spacing: -3px;
       user-select: none;
+      margin: 0;
+      text-align: left;
+      font-size: 30px;
     }
   }
   
