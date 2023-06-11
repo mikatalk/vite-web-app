@@ -174,9 +174,6 @@ height: auto;
         &.preview {
           background: url(~@/imgs/tile-hover.png) center no-repeat transparent;
           background-size: 100%;
-          // background-size: calc(100% - 3px);
-          // background-position: 1px 1px;
-          // background-color: rgba(242, 0, 227, 0.8);
         }
       }
     }
