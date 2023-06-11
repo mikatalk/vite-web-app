@@ -1,5 +1,21 @@
 #main-install-app-button {
-//   position: absolute;
-//   top: 0;
-//   right: 0;
+  font-size: 20px;
+  // text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
+  //           1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+  // letter-spacing: -3px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  background-color: #17507f;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  
+  &:hover {
+    border-color: #646cff;
+  }
+  
+  &:focus,
+  &:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
 }
