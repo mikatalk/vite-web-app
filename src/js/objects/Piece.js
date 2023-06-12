@@ -90,6 +90,13 @@ export class Piece {
     return Piece.PIECES[Math.floor(Piece.PIECES.length * Math.random())].type;
   }
 
+  copyPiece (piece) {
+    console.log('COPY PIECE', piece)
+    this.type = piece.type;
+    this.polyline = JSON.parse(JSON.stringify(this.type === Piece.PIECE_NONE.type ? Piece.PIECE_NONE : Piece.PIECES.find(({type}) => type === this.type)));
+    this.thumbnail = this.makeThumbnail();
+  }
+
   shuffle () {
     this.type = Piece.getRandomType();
     this.polyline = JSON.parse(JSON.stringify(this.type === Piece.PIECE_NONE.type ? Piece.PIECE_NONE : Piece.PIECES.find(({type}) => type === this.type)));

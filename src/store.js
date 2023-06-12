@@ -30,29 +30,58 @@ export const store = {
       state.bankPieces.forEach(piece => piece.shuffle())
       state.changes.bank.value += 1;
     },
-    // addBackupPiece () {
-    //   state.backupPiece = new Piece();
-    //   state.changes.bank.value += 1;
-    // },
     hasRendered (target) {
       state.changes[target].previous = state.changes[target].value;
     },
     bumpScoreBy (points) {
       state.score += points;
     },
+    setBackupPiece (piece) {
+      state.changes.bank.value += 1;
+      state.backupPiece.copyPiece(piece);
+    },
     removeFromBank (piece) {
-      // state
       state.changes.bank.value += 1;
       piece.disable();
-      // console.log('remove piece:', state.bankPieces.reduce((count, {type}) => count + type === Piece.PIECE_NONE.type ? 1 : 0, 0));
-      // console.log('remove piece:', state.bankPieces.filter(({type}) => type === Piece.PIECE_NONE.type))//.reduce((count, {type}) => count + type === Piece.PIECE_NONE.type ? 1 : 0, 0));
-      console.log('+++', state.bankPieces.filter(({type}) => type === Piece.PIECE_NONE.type))
       if (state.bankPieces.filter(({type}) => type === Piece.PIECE_NONE.type).length === 3) {
         store.mutate.resetBank();
         state.changes.bank.value += 1;
-
       }
-    }
+    },
+    checkWins () {
+      // find full lines (two passes for 2d overlaps)
+      const rows = []
+      const cols = []
+      for (let y = 0; y < 10; y += 1) {
+        let row = 0;
+        let col = 0;
+        for (let x = 0; x < 10; x += 1) {
+          if (state.grid.getCellValueAtPoint(x, y) === Cell.SET) {
+            row += 1;
+          }
+          if (state.grid.getCellValueAtPoint(y, x) === Cell.SET) {
+            col += 1;
+          }
+        }
+        rows.push(row);
+        cols.push(col);
+      }
+      // unset complete lines
+      for (let y = 0; y < 10; y += 1) {
+        if (rows[y] == 10) {
+          // full row
+          for (let x = 0; x < 10; x += 1) {
+            state.grid.setCellValueAtPoint(x, y, Cell.UNSET);
+          }
+        }
+        if (cols[y] == 10) {
+          // full col
+          for (let x = 0; x < 10; x += 1) {
+            state.grid.setCellValueAtPoint(y, x, Cell.UNSET);
+          }
+        }
+      }
+    },
   },
   getters: {
     getPieceById: pieceId => {
@@ -67,6 +96,7 @@ export const store = {
           return state.backupPiece;
       }
     },
+    canAcceptBackup: () => state.backupPiece.type === Piece.PIECE_NONE.type,
     gridChanged: () => state.changes.grid.previous !== state.changes.grid.value,
     bankChanged: () => state.changes.bank.previous !== state.changes.bank.value,
   }

@@ -31,6 +31,10 @@ const draggable = new Draggable([...bankPiecesElements, pieceBackupElement], gri
     const { x, y, pieceId } = data;
     const element = document.getElementById(pieceId);
     switch (action) {
+      case 'rotate':
+        console.log('ROTATE');
+        store.mutate.rotatePiece(piece);
+        break
       case 'drag':
         {
           element.style.opacity = 0;
@@ -44,15 +48,19 @@ const draggable = new Draggable([...bankPiecesElements, pieceBackupElement], gri
         break;
       case 'drop':
         {
-          if (x > 0.75 && y > 1) {
-            console.log('BANK DROP!')
-          }
           const piece = getters.getPieceById(pieceId);
+          if (x > 0.75 && y > 1 && store.getters.canAcceptBackup()) {
+            console.log('BANK DROP!');
+            store.mutate.setBackupPiece(piece);
+            store.mutate.removeFromBank(piece);
+            return
+          }
           const { points } = piece.polyline;
           const fit = grid.doesItFitAt(x, y, points, Cell.SET);
           if (fit) {
             store.mutate.bumpScoreBy(points.length);
             store.mutate.removeFromBank(piece);
+            store.mutate.checkWins();
             // piece.disable();
             element.style.opacity = 0;
           } else {
@@ -120,6 +128,7 @@ function redrawBank() {
     bankPiecesElements[index].style.opacity = 1;
   });
   pieceBackupElement.src = store.state.backupPiece.thumbnail.src;
+  pieceBackupElement.style.opacity = 1;
   pieceBackupElement.setAttribute('piece-type', store.state.backupPiece.type);
   store.mutate.hasRendered('bank');
 

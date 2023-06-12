@@ -9,6 +9,9 @@ export class Draggable {
   lastX = -1;
   lastY = -1;
 
+  startX = -1;
+  startY = -1;
+
   constructor (dragFromElements, dragTo, callBack) {
     
     this.dragFromElements = dragFromElements;
@@ -61,7 +64,11 @@ export class Draggable {
     this.image.style.width = this.image.style.height = size + 'px';
     this.image.style.top = event.pageY - window.scrollY - size/2 + 'px';
     this.image.style.left = event.pageX - size/2 + 'px';  
-    this.image.focus()
+    this.image.focus();
+
+    const { x, y } = this.getDropPosition(event);
+    this.startX = x;
+    this.startY = y;
   }
   
   touchMove = (event) => {
@@ -94,14 +101,26 @@ export class Draggable {
     }
     event.preventDefault(); 
     event.stopPropagation(); 
-    this.callBack('drop', {
-      x: this.lastX,
-      y: this.lastY,
-      pieceId: this.pieceId
-    });
-    this.pieceId = null;
-    this.hideImage();
-    navigator.vibrate(60);
+    // if (Math.hypot(this.lastX - this.startX, this.lastY - this.startY) < 1) {
+    if (this.lastX === -1 && this.lastY === -1) {
+      this.callBack('rotate', {
+        x: this.lastX,
+        y: this.lastY,
+        pieceId: this.pieceId
+      });
+
+    } else {
+      this.callBack('drop', {
+        x: this.lastX,
+        y: this.lastY,
+        pieceId: this.pieceId
+      });
+      this.pieceId = null;
+      this.hideImage();
+      navigator.vibrate(60);
+      // reset for next round to detect tap to rotate
+    }
+    this.lastX = this.lastY = -1;
   }
 
   getDropPosition (event) {
