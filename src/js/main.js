@@ -28,15 +28,15 @@ const pieceBackupElement = footerElement.querySelector('.backup.piece img');
 
 const draggable = new Draggable([...bankPiecesElements, pieceBackupElement], gridElement,
   (action, data) => {
+    const { x, y, pieceId } = data;
+    const element = document.getElementById(pieceId);
     switch (action) {
       case 'drag':
         {
-          const { pieceId } = data;
-          document.getElementById(pieceId).style.opacity = 0;
+          element.style.opacity = 0;
         }
         break;
       case 'move':
-        const { x, y, pieceId } = data;
         const piece = getters.getPieceById(pieceId);
         const { points } = piece.polyline;
         const fit = grid.doesItFitAt(x, y, points, Cell.PREVIEW);
@@ -44,7 +44,6 @@ const draggable = new Draggable([...bankPiecesElements, pieceBackupElement], gri
         break;
       case 'drop':
         {
-          const { x, y, pieceId } = data;
           if (x > 0.75 && y > 1) {
             console.log('BANK DROP!')
           }
@@ -52,9 +51,12 @@ const draggable = new Draggable([...bankPiecesElements, pieceBackupElement], gri
           const { points } = piece.polyline;
           const fit = grid.doesItFitAt(x, y, points, Cell.SET);
           if (fit) {
-            store.mutate.bumpScoreBy(points.length * 5)
+            store.mutate.bumpScoreBy(points.length);
+            store.mutate.removeFromBank(piece);
+            // piece.disable();
+            element.style.opacity = 0;
           } else {
-            document.getElementById(pieceId).style.opacity = 1;
+            element.style.opacity = 1;
           }
           state.changes.grid.value += 1;
         }
@@ -74,11 +76,7 @@ Assets.loadImages(
   ],
   progress => console.log('Progress:', progress),
   () => {
-    // store.mutate.doSomething();
-    store.mutate.addPieceToBank();
-    store.mutate.addPieceToBank();
-    store.mutate.addPieceToBank();
-    store.mutate.addBackupPiece();
+    store.mutate.resetBank();
     update()
   }
 );
@@ -110,15 +108,6 @@ function redrawGrid() {
     const el = cellElements[index];
     // reset classes
     el.className = 'box ' + value;
-        // el.classList.add(Cell.SET);
-    // switch (value) {
-    //   case Cell.SET:
-    //     el.classList.add(Cell.SET);
-    //     break;
-    //   // case Cell.SET:
-    //   //   el.classList.add(Cell.SET);
-    //   //   break;
-    // }
   })
   store.mutate.hasRendered('grid')
 }
@@ -128,10 +117,12 @@ function redrawBank() {
   store.state.bankPieces.forEach((piece, index) => {
     bankPiecesElements[index].src = piece.thumbnail.src;
     bankPiecesElements[index].setAttribute('piece-type', piece.type);
+    bankPiecesElements[index].style.opacity = 1;
   });
   pieceBackupElement.src = store.state.backupPiece.thumbnail.src;
   pieceBackupElement.setAttribute('piece-type', store.state.backupPiece.type);
-  store.mutate.hasRendered('bank')
+  store.mutate.hasRendered('bank');
+
 }
 
 console.log('v1')

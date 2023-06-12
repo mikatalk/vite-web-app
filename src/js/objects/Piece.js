@@ -1,13 +1,12 @@
 import { Assets } from "../utils/Assets";
 
 export class Piece {
-  static PIECES = [
+  static PIECE_NONE = { 
+    type: "none",
+    points: []
+  };
 
-    // // empty
-    // { 
-    //   type: "Empty",
-    //   points: []
-    // },
+  static PIECES = [
 
     // XXX
     //   X
@@ -83,21 +82,25 @@ export class Piece {
 
   constructor (type = Piece.getRandomType()) {
     this.type = type;
-  // constructor (type = null, dropOffTarget, callBack) {
-    // if (type) {
-      this.polyline = Piece.PIECES.find((a) => a.type === type);
-    // } else {
-    //   this.polyline = this.getRandomPiece();
-    // }
+    this.polyline = JSON.parse(JSON.stringify(type === Piece.PIECE_NONE.type ? Piece.PIECE_NONE : Piece.PIECES.find((a) => a.type === type)));
     this.thumbnail = this.makeThumbnail();
   }
 
   static getRandomType(){
     return Piece.PIECES[Math.floor(Piece.PIECES.length * Math.random())].type;
   }
-  // getRandomPiece(){
-  //   return JSON.parse(JSON.stringify(Piece.PIECES[Math.floor(Piece.PIECES.length * Math.random())]));
-  // }
+
+  shuffle () {
+    this.type = Piece.getRandomType();
+    this.polyline = JSON.parse(JSON.stringify(this.type === Piece.PIECE_NONE.type ? Piece.PIECE_NONE : Piece.PIECES.find(({type}) => type === this.type)));
+    this.thumbnail = this.makeThumbnail();
+  }
+
+  disable () {
+    this.polyline = Piece.PIECE_NONE;
+    this.type = Piece.PIECE_NONE.type
+    this.thumbnail = this.makeThumbnail();
+  }
 
   makeThumbnail () {
     const image = new Image();
