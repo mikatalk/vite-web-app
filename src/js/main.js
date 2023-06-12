@@ -30,10 +30,11 @@ const draggable = new Draggable([...bankPiecesElements, pieceBackupElement], gri
   (action, data) => {
     const { x, y, pieceId } = data;
     const element = document.getElementById(pieceId);
+    const piece = getters.getPieceById(pieceId);
     switch (action) {
       case 'rotate':
         console.log('ROTATE');
-        store.mutate.rotatePiece(piece);
+        piece.rotatePiece(piece);
         break
       case 'drag':
         {
@@ -41,14 +42,12 @@ const draggable = new Draggable([...bankPiecesElements, pieceBackupElement], gri
         }
         break;
       case 'move':
-        const piece = getters.getPieceById(pieceId);
         const { points } = piece.polyline;
         const fit = grid.doesItFitAt(x, y, points, Cell.PREVIEW);
         state.changes.grid.value += 1;
         break;
       case 'drop':
         {
-          const piece = getters.getPieceById(pieceId);
           if (x > 0.75 && y > 1 && store.getters.canAcceptBackup()) {
             console.log('BANK DROP!');
             store.mutate.setBackupPiece(piece);

@@ -90,6 +90,9 @@ export class Piece {
     return Piece.PIECES[Math.floor(Piece.PIECES.length * Math.random())].type;
   }
 
+  rotatePiece (piece) {
+  }
+
   copyPiece (piece) {
     console.log('COPY PIECE', piece)
     this.type = piece.type;
