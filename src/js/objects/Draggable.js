@@ -43,8 +43,10 @@ export class Draggable {
     event.stopPropagation();
     event.preventDefault();
     const [touch] = event.touches;
-    event.pageX = touch.pageX;
-    event.pageY = touch.pageY;
+    if (!('pageX' in event)) {
+      event.pageX = touch.pageX;
+      event.pageY = touch.pageY;
+    }
     this.dragStart(event);
   }
   dragStart = (event) => {
@@ -64,8 +66,10 @@ export class Draggable {
   
   touchMove = (event) => {
     const [touch] = event.touches;
-    event.pageX = touch.pageX;
-    event.pageY = touch.pageY;
+    if (!('pageX' in event)) {
+      event.pageX = touch.pageX;
+      event.pageY = touch.pageY;
+    }
     this.dragMove(event);
   }
 

@@ -133,3 +133,5 @@ function redrawBank() {
   pieceBackupElement.setAttribute('piece-type', store.state.backupPiece.type);
   store.mutate.hasRendered('bank')
 }
+
+console.log('v1')
