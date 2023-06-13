@@ -46,16 +46,8 @@ export class Grid {
     if (indexX < -1 || indexX > 9 || indexY < -1 || indexY > 9) {
       return false;
     }
-    console.log(width, height)
-// const offsetX = -(width % 2 === 0 ? 0.5 : 0);
-// const offsetY = -(height % 2 === 0 ? 0.5 : 0);
-const offsetX = 0//-(width % 2 === 0 ? 0.5 : 0);
-const offsetY = 0//-(height % 2 === 0 ? 0.5 : 0);
-    const startX = indexX -  Math[width % 2 === 0 ? 'round' : 'floor']((width ) / 2 + offsetX);
-    const startY = indexY - Math[height % 2 === 0 ? 'round' : 'floor']((height ) / 2 + offsetY );
-    // const startX = indexX - Math.floor(width / 2 - (width % 2) / 4);
-    // const startY = indexY - Math.floor(height / 2 - (height % 2) / 4);
-
+    const startX = indexX -  Math[width % 2 === 0 ? 'round' : 'floor']((width ) / 2);
+    const startY = indexY - Math[height % 2 === 0 ? 'round' : 'floor']((height ) / 2 );
     let itFits = true;
     points.forEach(([pX,pY]) => {
       const x = startX + pX;
