@@ -78,12 +78,13 @@ export class Piece {
   
   static canvas = document.createElement('canvas');
   static context = Piece.canvas.getContext('2d');
-  thumbnail = null;
+
   imageString = '';
+
   constructor (type = Piece.getRandomType()) {
     this.type = type;
     this.polyline = JSON.parse(JSON.stringify(type === Piece.PIECE_NONE.type ? Piece.PIECE_NONE : Piece.PIECES.find((a) => a.type === type)));
-    this.thumbnail = this.makeThumbnail();
+    this.makeThumbnail();
   }
 
   static getRandomType(){
@@ -106,12 +107,12 @@ export class Piece {
       }
     }
     // rotate matrix:
-    console.log('Piece rotation 1:', array2d);
+    // console.log('Piece rotation 1:', array2d);
     array2d = array2d.map((val, index) => array2d.map(row => row[index]).reverse());
-    console.log('Piece rotation 2:', array2d);
-    // remove padding from left and top sides to align rotation
-
+    // console.log('Piece rotation 2:', array2d);
+    
     // convert back to points array
+    // while removing padding from left and top sides to align rotation
     this.polyline.points = [];
     for (let y = 0; y < size; y += 1) {
       for(let x = 0; x < size; x += 1) {
@@ -124,28 +125,26 @@ export class Piece {
   }
 
   copyPiece (piece) {
-    console.log('COPY PIECE', piece)
     this.type = piece.type;
     this.polyline = JSON.parse(JSON.stringify(this.type === Piece.PIECE_NONE.type ? Piece.PIECE_NONE : Piece.PIECES.find(({type}) => type === this.type)));
-    this.thumbnail = this.makeThumbnail();
+    this.makeThumbnail();
   }
 
   shuffle () {
     this.type = Piece.getRandomType();
     this.polyline = JSON.parse(JSON.stringify(this.type === Piece.PIECE_NONE.type ? Piece.PIECE_NONE : Piece.PIECES.find(({type}) => type === this.type)));
-    this.thumbnail = this.makeThumbnail();
+    this.makeThumbnail();
   }
 
   disable () {
     this.polyline = Piece.PIECE_NONE;
     this.type = Piece.PIECE_NONE.type
-    this.thumbnail = this.makeThumbnail();
+    this.makeThumbnail();
   }
 
   makeThumbnail () {
-    const image = new Image();
-    image.width = Piece.canvas.width = 100;
-    image.height = Piece.canvas.height = 100;
+    Piece.canvas.width = 100;
+    Piece.canvas.height = 100;
     const ctx = Piece.context;
     ctx.clearRect(0,0,100,100);
     const tile = Assets.getImage('tile');
@@ -160,8 +159,5 @@ export class Piece {
       }
     }
     this.imageString = Piece.canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-    image.src = this.imageString;
-    // image.src = Piece.canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-    return image;
   }
 }
