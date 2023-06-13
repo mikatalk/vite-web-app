@@ -33,8 +33,13 @@ const draggable = new Draggable([...bankPiecesElements, pieceBackupElement], gri
     const piece = getters.getPieceById(pieceId);
     switch (action) {
       case 'rotate':
-        console.log('ROTATE');
-        piece.rotatePiece(piece);
+        console.log('ROTATE', element);
+        piece.rotatePiece();
+        // element.src = piece.thumbnail.src;
+        element.src = piece.imageString;
+        element.style.opacity = 1;
+        // state.changes.bank.value += 1;
+
         break
       case 'drag':
         {
@@ -75,6 +80,7 @@ import imgTile from './../imgs/tile.png'
 import imgTileHighlight from './../imgs/tile-highlight.png'
 import imgTileHover from './../imgs/tile-hover.png'
 import { Cell } from './objects/Cell';
+import { Piece } from './objects/Piece';
 Assets.loadImages(
   [
     { name: 'tile', url: imgTile },
@@ -122,11 +128,13 @@ function redrawGrid() {
 function redrawBank() {
   console.log('redraw bank')
   store.state.bankPieces.forEach((piece, index) => {
-    bankPiecesElements[index].src = piece.thumbnail.src;
+    // bankPiecesElements[index].src = piece.thumbnail.src;
+    bankPiecesElements[index].src = piece.imageString;
     bankPiecesElements[index].setAttribute('piece-type', piece.type);
     bankPiecesElements[index].style.opacity = 1;
   });
-  pieceBackupElement.src = store.state.backupPiece.thumbnail.src;
+  // pieceBackupElement.src = store.state.backupPiece.thumbnail.src;
+  pieceBackupElement.src = store.state.backupPiece.imageString;
   pieceBackupElement.style.opacity = 1;
   pieceBackupElement.setAttribute('piece-type', store.state.backupPiece.type);
   store.mutate.hasRendered('bank');

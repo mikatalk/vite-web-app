@@ -79,7 +79,7 @@ export class Piece {
   static canvas = document.createElement('canvas');
   static context = Piece.canvas.getContext('2d');
   thumbnail = null;
-
+  imageString = '';
   constructor (type = Piece.getRandomType()) {
     this.type = type;
     this.polyline = JSON.parse(JSON.stringify(type === Piece.PIECE_NONE.type ? Piece.PIECE_NONE : Piece.PIECES.find((a) => a.type === type)));
@@ -90,7 +90,37 @@ export class Piece {
     return Piece.PIECES[Math.floor(Piece.PIECES.length * Math.random())].type;
   }
 
-  rotatePiece (piece) {
+  rotatePiece () {
+
+    const width = (1 + Math.max(...this.polyline.points.map(([x]) => x))) - Math.min(...this.polyline.points.map(([x]) => x));
+    const height = (1 + Math.max(...this.polyline.points.map(([,y]) => y))) - Math.min(...this.polyline.points.map(([,y]) => y));
+    const size = Math.max(width, height);
+    const {points} = this.polyline;
+    // convert data to 2d matrix:
+    let array2d = [];
+    for (let y = 0; y < size; y += 1) {
+      array2d.push([])
+      for(let x = 0; x < size; x += 1) {
+        const match = points.find(([pX, pY]) => x === pX && y === pY)
+        array2d[y].push(match ? 1 : 0);
+      }
+    }
+    // rotate matrix:
+    console.log('Piece rotation 1:', array2d);
+    array2d = array2d.map((val, index) => array2d.map(row => row[index]).reverse());
+    console.log('Piece rotation 2:', array2d);
+    // remove padding from left and top sides to align rotation
+
+    // convert back to points array
+    this.polyline.points = [];
+    for (let y = 0; y < size; y += 1) {
+      for(let x = 0; x < size; x += 1) {
+        if (array2d[y][x] === 1) {
+          this.polyline.points.push([x - Math.max(0, width-height), y - Math.max(0, height-width)]);
+        }
+      }
+    }
+    this.makeThumbnail();  
   }
 
   copyPiece (piece) {
@@ -129,7 +159,9 @@ export class Piece {
           18, 18);
       }
     }
-    image.src = Piece.canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+    this.imageString = Piece.canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+    image.src = this.imageString;
+    // image.src = Piece.canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
     return image;
   }
 }

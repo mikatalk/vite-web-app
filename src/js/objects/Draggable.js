@@ -53,6 +53,9 @@ export class Draggable {
     this.dragStart(event);
   }
   dragStart = (event) => {
+    if (this.dragging) {
+      return
+    }
     this.pieceId = event.target.id;
     this.callBack('drag', { pieceId: this.pieceId });
 
@@ -103,12 +106,14 @@ export class Draggable {
     event.stopPropagation(); 
     // if (Math.hypot(this.lastX - this.startX, this.lastY - this.startY) < 1) {
     if (this.lastX === -1 && this.lastY === -1) {
+      console.log('ROTATE');
       this.callBack('rotate', {
         x: this.lastX,
         y: this.lastY,
         pieceId: this.pieceId
       });
-
+      this.pieceId = null;
+      this.hideImage();
     } else {
       this.callBack('drop', {
         x: this.lastX,
