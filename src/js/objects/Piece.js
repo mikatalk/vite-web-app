@@ -19,6 +19,15 @@ export class Piece {
     // X
     //  X
     //   X
+    //    X
+    { 
+      type: "MidX4",
+      rotationAble: true, 
+      points: [[0,0], [1,1], [2,2], [3,3]]
+    },
+    // X
+    //  X
+    //   X
     { 
       type: "MidX2",
       rotationAble: true, 
