@@ -1,5 +1,5 @@
 export class Cell {
-  static UNSET = '';
+  static UNSET = 'unset';
   static SET = 'set';
   static PREVIEW = 'preview';
 
