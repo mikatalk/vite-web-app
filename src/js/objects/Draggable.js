@@ -105,7 +105,9 @@ export class Draggable {
     event.preventDefault(); 
     event.stopPropagation(); 
     // if (Math.hypot(this.lastX - this.startX, this.lastY - this.startY) < 1) {
-    if (this.lastX === -1 && this.lastY === -1) {
+    if ((this.lastX === -1 && this.lastY === -1) ||
+      this.lastY > 1 && this.lastX > 0 && this.lastX < 0.8
+    ) {
       console.log('ROTATE');
       this.callBack('rotate', {
         x: this.lastX,
