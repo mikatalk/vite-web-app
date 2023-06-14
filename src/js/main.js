@@ -10,6 +10,11 @@ const { state, getters } = store;
 const { grid } = state;
 const { cells } = grid;
 
+// const undoBtn = document.querySelector('#undo-btn');
+// undoBtn.addEventListener('click', () => store.mutate.undo())
+const restartBtn = document.querySelector('#restart-btn');
+restartBtn.addEventListener('click', () => store.mutate.restart())
+
 const gridElement = document.querySelector('#app .grid');
 const cellElements = [];
 cells.forEach(({ value }) => {
@@ -38,8 +43,8 @@ const draggable = new Draggable([...bankPiecesElements, pieceBackupElement], gri
         // element.src = piece.thumbnail.src;
         element.src = piece.imageString;
         element.style.opacity = 1;
-        // state.changes.bank.value += 1;
-
+        state.changes.bank.value += 1;
+redrawBank()
         break
       case 'drag':
         {

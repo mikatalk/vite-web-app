@@ -31,6 +31,12 @@ export class Grid {
     return x + 10 * y;
   }
 
+  reset() {
+    this.cells.forEach(cell => {
+      cell.value = Cell.UNSET;
+    });
+  }
+
   doesItFitAt(mouseX, mouseY, points, activeClass = Cell.SET) {
     // reset previews
     this.cells.forEach(cell => {

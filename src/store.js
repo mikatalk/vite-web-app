@@ -30,6 +30,17 @@ export const store = {
       state.bankPieces.forEach(piece => piece.shuffle())
       state.changes.bank.value += 1;
     },
+    undo () {
+      // TODO
+    },
+    restart () {
+      state.grid.reset();
+      state.bankPieces.forEach(piece => piece.shuffle());
+      state.score = 0;
+      state.backupPiece.disable();
+      state.changes.grid.value += 1;
+      state.changes.bank.value += 1;
+    },
     hasRendered (target) {
       state.changes[target].previous = state.changes[target].value;
     },

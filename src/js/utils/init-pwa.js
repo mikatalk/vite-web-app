@@ -1,5 +1,3 @@
-console.log('Initializing PWA...')
-
 import { registerSW } from "virtual:pwa-register";
 
 if ("serviceWorker" in navigator && !/localhost/.test(window.location)) {
@@ -9,9 +7,8 @@ if ("serviceWorker" in navigator && !/localhost/.test(window.location)) {
 // Code to handle install prompt on desktop
 
 let deferredPrompt;
-const addBtn = document.querySelector('#main-install-app-button');
+const addBtn = document.querySelector('#install-btn');
 
-console.log('Running')
 window.addEventListener('beforeinstallprompt', (e) => {
   // Prevent Chrome 67 and earlier from automatically showing the prompt
   e.preventDefault();
@@ -21,7 +18,6 @@ window.addEventListener('beforeinstallprompt', (e) => {
   addBtn.style.display = 'block';
 
   addBtn.addEventListener('click', () => {
-    console.log('CLICK!')
     // hide our user interface that shows our A2HS button
     addBtn.style.display = 'none';
     // Show the prompt
