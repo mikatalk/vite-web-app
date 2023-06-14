@@ -63,7 +63,7 @@ export class Draggable {
     this.showImage();
 
     const { width } = this.dragTo.getBoundingClientRect();
-    const size = width / 2.1;
+    const size = width / 2.4;
     this.image.style.width = this.image.style.height = size + 'px';
     this.image.style.top = event.pageY - window.scrollY - size/2 + 'px';
     this.image.style.left = event.pageX - size/2 + 'px';  
