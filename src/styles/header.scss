@@ -3,7 +3,6 @@
   min-height: 120px;
   display: flex;
   flex-wrap: wrap;
-  // flex-direction: column;
   align-items: center;
   justify-content: center;
   & > * {
@@ -27,9 +26,6 @@
   
   .button-cta {
     font-size: 20px;
-    // text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
-    //           1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
-    // letter-spacing: -3px;
     border-radius: 8px;
     border: 1px solid transparent;
     padding: 0.6em 1.2em;
