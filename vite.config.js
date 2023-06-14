@@ -33,19 +33,12 @@ const htmlPlugin = mode => {
 
 export default ({ mode }) => {
     return defineConfig({
-      // base: mode === 'production' ? '/vite-web-app/' : '/',
-      // base: mode === 'production' ? 'https://bricks.tips4devs.com' : '/',
       plugins: [
         VitePWA({
           registerType: 'autoUpdate',
-          // includeAssets: ['vite.svg'],
           manifest: {
 
-            // "scope": "/vite-web-app/",
             "start_url": "/index.html", 
-          
-            // "scope": "/vite-web-app/",
-            // "start_url": "/vite-web-app/index.html", 
           
             "background_color": "#7cc4ff",
             "theme_color": "#7cc4ff",

@@ -8,10 +8,77 @@ export class Piece {
 
   static PIECES = [
 
+    // //  X
+    // // X
+    // { 
+    //   type: "MidL",
+    //   rotationAble: true, 
+    //   points: [[1,1], [0,1]]
+    // },
+
+    // X
+    //  X
+    //   X
+    { 
+      type: "MidX2",
+      rotationAble: true, 
+      points: [[0,0], [1,1], [2,2]]
+    },
+
+    // X
+    //  X
+    { 
+      type: "MidX",
+      rotationAble: true, 
+      points: [[0,0], [1,1]]
+    },
+
+    //  X
     // XXX
+    //  X
+    { 
+      type: "MidPlus",
+      rotationAble: true, 
+      points: [[1,0], [0,1], [1,1], [2,1], [1,2]]
+    },
+
+    // XXX
+    //  X
+    //  X
+    { 
+      type: "MidTT",
+      rotationAble: true, 
+      points: [[0,0], [1,0], [2,0], [1,1], [1,2]]
+    },
+
+    // XXX
+    //  X
+    { 
+      type: "MidT",
+      rotationAble: true, 
+      points: [[0,0], [1,0], [2,0], [1,1]]
+    },
+    // //  X
+    // // XXX
+    // { 
+    //   type: "MidL",
+    //   rotationAble: true, 
+    //   points: [[1,0], [0,1], [1,1], [2,1],[1,2]]
+    // },
+
+    // XX
+    // X
     // X
     { 
       type: "MidL",
+      rotationAble: true, 
+      points: [[0,0], [1,0], [0,1], [0,2]]
+    },
+
+    // XXX
+    // X
+    { 
+      type: "MidL2",
       rotationAble: true, 
       points: [[0,0], [1,0], [2,0], [2,1]]
     },
