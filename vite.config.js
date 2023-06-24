@@ -37,7 +37,7 @@ export default ({ mode }) => {
         VitePWA({
           registerType: 'autoUpdate',
           manifest: {
-
+            "name": "Bricks",
             "start_url": "/index.html", 
           
             "background_color": "#7cc4ff",
@@ -46,10 +46,16 @@ export default ({ mode }) => {
             "display": "standalone",
             "icons": [
               {
+                "src": "icon-full.png",
+                "sizes": "512x512",
+                "type": "image/png",
+                "purpose": "any"
+              },
+              {
                 "src": "icon.png",
                 "sizes": "512x512",
                 "type": "image/png",
-                "purpose": "any maskable"
+                "purpose": "maskable"
               }
             ],
             "name": "Bricks",
