@@ -32,7 +32,8 @@
     background-color: #17507f;
     cursor: pointer;
     transition: border-color 0.25s;
-  
+    line-height: 1;
+    
     &:hover {
       border-color: #646cff;
     }
