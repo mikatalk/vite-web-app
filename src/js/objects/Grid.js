@@ -2,7 +2,7 @@ import { Cell } from "./Cell";
 
 export class Grid {
   cells = Array.from({ length: 100 }).map((_, index) => new Cell(index % 10, Math.floor(index / 10)));
-
+  previousCells = null;
   getCellValueAtIndex(index) {
     return this.cells[index].value;
   }
@@ -38,6 +38,8 @@ export class Grid {
   }
 
   doesItFitAt(mouseX, mouseY, points, activeClass = Cell.SET) {
+    this.previousCells = this.getState().cells;
+
     // reset previews
     this.cells.forEach(cell => {
       if (cell.value === Cell.PREVIEW) {
@@ -88,5 +90,18 @@ export class Grid {
       }
     })
     return itFits;
+  }
+
+
+  getState () {
+    return JSON.parse(JSON.stringify({
+      cells: this.cells,
+    }))
+  }
+
+  setState (cells) {
+    this.reset()
+    this.cells.length = 0;
+    this.cells = cells.map(({x, y, value}) => new Cell(x, y, value));
   }
 }

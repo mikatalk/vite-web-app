@@ -14,6 +14,8 @@ const { cells } = grid;
 // undoBtn.addEventListener('click', () => store.mutate.undo())
 const restartBtn = document.querySelector('#restart-btn');
 restartBtn.addEventListener('click', () => store.mutate.restart())
+const undoBtn = document.querySelector('#undo-btn');
+undoBtn.addEventListener('click', () => store.mutate.undo())
 
 const gridElement = document.querySelector('#app .grid');
 const cellElements = [];
@@ -60,13 +62,16 @@ redrawBank()
         {
           if (x > 0.75 && y > 1 && store.getters.canAcceptBackup()) {
             console.log('BANK DROP!');
+            store.mutate.saveHistory();
             store.mutate.setBackupPiece(piece);
             store.mutate.removeFromBank(piece);
+            // store.mutate.saveHistory();
             return
           }
           const { points } = piece.polyline;
           const fit = grid.doesItFitAt(x, y, points, Cell.SET);
           if (fit) {
+            store.mutate.saveHistory();
             store.mutate.bumpScoreBy(points.length);
             store.mutate.removeFromBank(piece);
             store.mutate.checkWins();
@@ -94,8 +99,8 @@ Assets.loadImages(
   ],
   progress => console.log('Progress:', progress),
   () => {
-    store.mutate.resetBank();
-    update()
+    store.mutate.restart();
+    update();
   }
 );
 
@@ -104,8 +109,6 @@ Assets.loadImages(
 
 function update() {
   window.requestAnimationFrame(update);
-
-  // store.mutate.doSomething();
 
   if (getters.gridChanged()) {
     redrawGrid();
@@ -121,29 +124,27 @@ function redrawScore() {
 }
 
 function redrawGrid() {
-  console.log('redraw grid')
+  console.log('redraw grid');
+  const { cells } = store.state.grid;
   cells.forEach(({ value }, index) => {
     const el = cellElements[index];
     // reset classes
     el.className = 'box ' + value;
   })
-  store.mutate.hasRendered('grid')
+  store.mutate.hasRendered('grid');
 }
 
 function redrawBank() {
   console.log('redraw bank')
   store.state.bankPieces.forEach((piece, index) => {
-    // bankPiecesElements[index].src = piece.thumbnail.src;
     bankPiecesElements[index].src = piece.imageString;
     bankPiecesElements[index].setAttribute('piece-type', piece.type);
     bankPiecesElements[index].style.opacity = 1;
   });
-  // pieceBackupElement.src = store.state.backupPiece.thumbnail.src;
   pieceBackupElement.src = store.state.backupPiece.imageString;
   pieceBackupElement.style.opacity = 1;
   pieceBackupElement.setAttribute('piece-type', store.state.backupPiece.type);
   store.mutate.hasRendered('bank');
-
 }
 
-console.log('v1')
+console.log('v1.0.1');

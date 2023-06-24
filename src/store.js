@@ -20,26 +20,58 @@ const state = {
       previous: 0,
       value: 1,
     }
-  }
+  },
+  history: [
+
+  ]
 };
 
 export const store = {
   state,
   mutate: {
-    resetBank () {
-      state.bankPieces.forEach(piece => piece.shuffle())
-      state.changes.bank.value += 1;
-    },
     undo () {
-      // TODO
+      const {
+        score = state.score,
+        bankPieces,
+        backupPiece,
+        grid
+      } = state.history.pop() || {};
+      if(bankPieces && backupPiece && grid) {
+        store.mutate.restart();
+        state.score = score;
+        state.bankPieces.forEach((piece, index) => piece.setState(bankPieces[index]));
+        state.backupPiece.setState(backupPiece);
+        state.grid.setState(grid);
+        state.changes.grid.value += 1;
+        state.changes.bank.value += 1;
+      }
+    },
+    saveHistory () {
+      const {
+        score,
+        bankPieces,
+        backupPiece,
+        grid
+      } = state;
+      state.history.push({
+        score,
+        bankPieces: bankPieces.map(piece => piece.getState()),
+        backupPiece: backupPiece.getState(),
+        grid: grid.previousCells.map(({x, y, value}) => ({
+            x, y, value: value === Cell.SET ? Cell.SET : Cell.UNSET
+          })),
+      });
+    },
+    resetBank () {
+      state.bankPieces.forEach(piece => piece.shuffle());
+      state.changes.bank.value += 1;
     },
     restart () {
       state.grid.reset();
-      state.bankPieces.forEach(piece => piece.shuffle());
       state.score = 0;
+      store.mutate.resetBank();
       state.backupPiece.disable();
       state.changes.grid.value += 1;
-      state.changes.bank.value += 1;
     },
     hasRendered (target) {
       state.changes[target].previous = state.changes[target].value;
@@ -56,7 +88,6 @@ export const store = {
       piece.disable();
       if (state.bankPieces.filter(({type}) => type === Piece.PIECE_NONE.type).length === 3) {
         store.mutate.resetBank();
-        state.changes.bank.value += 1;
       }
     },
     checkWins () {

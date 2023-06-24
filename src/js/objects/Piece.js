@@ -8,21 +8,12 @@ export class Piece {
 
   static PIECES = [
 
-    // //  X
-    // // X
-    // { 
-    //   type: "MidL",
-    //   rotationAble: true, 
-    //   points: [[1,1], [0,1]]
-    // },
-
     // X
     //  X
     //   X
     //    X
     { 
       type: "MidX4",
-      rotationAble: true, 
       points: [[0,0], [1,1], [2,2], [3,3]]
     },
     // X
@@ -30,7 +21,6 @@ export class Piece {
     //   X
     { 
       type: "MidX2",
-      rotationAble: true, 
       points: [[0,0], [1,1], [2,2]]
     },
 
@@ -38,7 +28,6 @@ export class Piece {
     //  X
     { 
       type: "MidX",
-      rotationAble: true, 
       points: [[0,0], [1,1]]
     },
 
@@ -47,7 +36,6 @@ export class Piece {
     //  X
     { 
       type: "MidPlus",
-      rotationAble: true, 
       points: [[1,0], [0,1], [1,1], [2,1], [1,2]]
     },
 
@@ -56,7 +44,6 @@ export class Piece {
     //  X
     { 
       type: "MidTT",
-      rotationAble: true, 
       points: [[0,0], [1,0], [2,0], [1,1], [1,2]]
     },
 
@@ -64,14 +51,12 @@ export class Piece {
     //  X
     { 
       type: "MidT",
-      rotationAble: true, 
       points: [[0,0], [1,0], [2,0], [1,1]]
     },
     // //  X
     // // XXX
     // { 
     //   type: "MidL",
-    //   rotationAble: true, 
     //   points: [[1,0], [0,1], [1,1], [2,1],[1,2]]
     // },
 
@@ -80,7 +65,6 @@ export class Piece {
     // X
     { 
       type: "MidL",
-      rotationAble: true, 
       points: [[0,0], [1,0], [0,1], [0,2]]
     },
 
@@ -88,7 +72,6 @@ export class Piece {
     // X
     { 
       type: "MidL2",
-      rotationAble: true, 
       points: [[0,0], [1,0], [2,0], [2,1]]
     },
 
@@ -97,7 +80,6 @@ export class Piece {
     //   X
     { 
       type: "BigL",
-      rotationAble: true, 
       points: [[0,0], [1,0], [2,0], [2,1], [2,2]]
     },
 
@@ -105,14 +87,12 @@ export class Piece {
     //  X
     { 
       type: "SmallL",
-      rotationAble: true, 
       points: [[0,0], [1,0], [1,1]]
     },
 
     // X
     { 
       type: "Dot",
-      rotationAble: false, 
       points: [[0,0]]
     },
 
@@ -120,7 +100,6 @@ export class Piece {
     // XX
     { 
       type: "SmallSquare",
-      rotationAble: false, 
       points: [[0,0], [1,0], [0,1], [1,1]]
     },
 
@@ -129,32 +108,27 @@ export class Piece {
     // XXX
     { 
       type: "BigSquare",
-      rotationAble: false, 
       points: [[0,0], [1,0], [2,0], [0,1], [1,1], [2,1], [0,2], [1,2], [2,2]]
     },
 
     // XX
     { 
       type: "Line2",
-      rotationAble: true, 
       points: [[0,0], [1,0]]
     },
     // XXX
     { 
       type: "Line3",
-      rotationAble: true, 
       points: [[0,0], [1,0], [2,0]]
     },
     // XXXX
     { 
       type: "Line4",
-      rotationAble: true, 
       points: [[0,0], [1,0], [2,0], [3,0]]
     },
     // XXXXX
     { 
       type: "Line5",
-      rotationAble: true, 
       points: [[0,0], [1,0], [2,0], [3,0], [4,0]]
     },
     
@@ -191,17 +165,13 @@ export class Piece {
       }
     }
     // rotate matrix:
-    console.log('Piece points 1:', points);
-    console.log('Piece rotation 1:\n' + array2d.join('\n'));
+    // console.log('Piece points 1:', points);
+    // console.log('Piece rotation 1:\n' + array2d.join('\n'));
     array2d = array2d.map((val, index) => array2d.map(row => row[index]).reverse());
-    console.log('Piece rotation 2:\n' + array2d.join('\n'));
+    // console.log('Piece rotation 2:\n' + array2d.join('\n'));
     
-    // Remove padding from left and top sides to align rotation
-
     const transposeX = width - height;
-    const transposeY = height - width;
     if (width > height) {
-
       for (let y = 0; y < size; y += 1) {
         for(let x = 0; x < size; x += 1) {
           if (x + transposeX < size) {
@@ -211,61 +181,19 @@ export class Piece {
           }
         }
       }
-    } else {
-      // for(let x = 0; x < size; x += 1) {
-      //   for (let y = 0; y < size; y += 1) {
-      //     if (y + transposeY < size) {
-      //       array2d[y][x] = array2d[y+transposeY][x];
-      //     } else {
-      //       array2d[y][x] = 0;
-      //     }
-      //   }
-      // }
     }
-    // if (width < height) {
-    //   array2d.forEach((array, index) => (array2d[index] = array.slice(height - width)));
-    // } else if (width > height) {
-    //   array2d = array2d.slice(width - height);
-    // }
-    // // array2d = array2d.slice(Math.max(0, height-width));
-
-    // array2d = (w=>(t=w=>(q=(s=w=>w.some((r,j)=>r.find(e=>e,i=j))?w.slice(i).reverse():[[]])(s(w)))[0].map((e,j)=>q.map((e,i)=>q[i][j])))(t(w)))(array2d)
-
-    // for (let y = 0; y < size; y += 1) {
-    //   let empty = true;
-    //   // for(let x = 0; x < size; x += 1) {
-    //   //   if (array2d[y][x] > 0) {
-    //   //     empty = false;
-    //   //     break
-    //   //   }
-    //   // }
-
-    // }
-
-    console.log('Piece rotation 3:\n' + array2d.join('\n'));
-
-    // convert back to points array
+  
     this.polyline.points = [];
-    // for (let y = 0; y < array2d.length; y += 1) {
-    //   for(let x = 0; x < array2d[y].length; x += 1) {
-      for(let x = 0; x < array2d.length; x += 1) {
-    for (let y = 0; y < array2d[x].length; y += 1) {
+    for(let x = 0; x < array2d.length; x += 1) {
+      for (let y = 0; y < array2d[x].length; y += 1) {
         if (array2d[y][x] === 1) {
           this.polyline.points.push([
             x,
             y,
-            // x - (width-height)/2,
-            // y - (height-width)/2,
-            // x - Math.round((width-height)),
-            // y - Math.round((height-width)),
-            // x - Math.min(0, -width),
-            // y - Math.min(0, -height)
           ]);
         }
       }
     }
-
-    console.log('Piece points 2:', points);
     this.makeThumbnail();  
   }
 
@@ -285,6 +213,20 @@ export class Piece {
     this.polyline = Piece.PIECE_NONE;
     this.type = Piece.PIECE_NONE.type
     this.makeThumbnail();
+  }
+
+  getState () {
+    return JSON.parse(JSON.stringify({
+      type: this.type,
+      polyline: this.polyline,
+      imageString: this.imageString,
+    }))
+  }
+
+  setState ({type, polyline, imageString}) {
+    this.type = type;
+    this.polyline = polyline;
+    this.imageString = imageString;
   }
 
   makeThumbnail () {
